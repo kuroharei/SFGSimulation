@@ -93,31 +93,35 @@ export function MediumForm() {
 export function MolecularForm() {
   return (
     <form>
-      <label htmlFor="FWHM">Δθ(°) :</label>
-      <small id="FWHMHelp" className="form-text text-muted">
-        (Distribution width of orientational angle θ)
-      </small>
-      <input
-        type="text"
-        name="FWHM"
-        className="form-control"
-        id="FWHM"
-      />
-      <label htmlFor="symmetry">
-        Symmetry
-      </label>
-      <small id="symmetryHelp" className="form-text text-white-50">
-        (Symmetry of molecule)
-      </small>
-      <select
-        name="symmetry"
-        className="form-control selectpicker"
-        id="symmetry-controller"
-      >
-        <option id="C3v-select" value="C3v" data-content="C<sub>3v</sub>" />
-        <option id="C2v-select" value="C2v" data-content="C<sub>2v</sub>" />
-        <option id="Cinfv-select" value="Cinfv" data-content="C<sub>∞v</sub>" />
-      </select>
+      <div className="mb-3">
+        <label htmlFor="FWHM">Δθ(°) :</label>
+        <small id="FWHMHelp" className="form-text text-muted">
+          (Distribution width of orientational angle θ)
+        </small>
+        <input
+          type="text"
+          name="FWHM"
+          className="form-control"
+          id="FWHM"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="symmetry">
+          Symmetry
+        </label>
+        <small id="symmetryHelp" className="form-text text-white-50">
+          (Symmetry of molecule)
+        </small>
+        <select
+          name="symmetry"
+          className="form-control selectpicker"
+          id="symmetry-controller"
+        >
+          <option id="C3v-select" value="C3v" data-content="C<sub>3v</sub>" />
+          <option id="C2v-select" value="C2v" data-content="C<sub>2v</sub>" />
+          <option id="Cinfv-select" value="Cinfv" data-content="C<sub>∞v</sub>" />
+        </select>
+      </div>
     </form>
   )
 }
