@@ -129,79 +129,89 @@ export function MolecularForm() {
 export function LightForm() {
   return (
     <form>
-      <label htmlFor="lamdavis">
-        λ<sub>VIS</sub>(nm) :
-      </label>
-      <small id="lamdavisHelp" className="form-text text-muted">
-        (Wavelength of visible light)
-      </small>
-      <input
-        type="text"
-        name="lamdavis"
-        className="form-control"
-        id="lamdavis"
-      />
-      <label htmlFor="lamdair">
-        λ<sub>IR</sub>(nm) :
-      </label>
-      <small id="lamdairHelp" className="form-text text-muted">
-        (Wavelength of IR light)
-      </small>
-      <input
-        type="text"
-        name="lamdair"
-        className="form-control"
-        id="lamdair"
-      />
-      <label htmlFor="betavis">
-        β<sub>VIS</sub>(°) :
-      </label>
-      <small id="betavisHelp" className="form-text text-muted">
-        (Incident angle of visible light)
-      </small>
-      <input
-        type="range"
-        name="betavis"
-        id="betavis"
-        className="custom-range"
-        min={0}
-        max={90}
-        step="0.1"
-      />
-      <input
-        type="text"
-        id="betavisValue"
-        className="form-control"
-      />
-      <label htmlFor="betair">
-        β<sub>IR</sub>(°) :
-      </label>
-      <small id="betairHelp" className="form-text text-muted">
-        (Incident angle of IR light)
-      </small>
-      <input
-        type="range"
-        name="betair"
-        id="betair"
-        className="custom-range"
-        min={0}
-        max={90}
-        step="0.1"
-      />
-      <input
-        type="text"
-        id="betairValue"
-        className="form-control"
-      />
-      <label htmlFor="betasfgValue">
-        β<sub>SFG</sub>(°) :
-      </label>
-      <input
-        readOnly
-        type='text'
-        id="betasfgValue"
-        className="form-control"
-      />
+      <div className="mb-3">
+        <label htmlFor="lamdavis">
+          λ<sub>VIS</sub>(nm) :
+        </label>
+        <small id="lamdavisHelp" className="form-text text-muted">
+          (Wavelength of visible light)
+        </small>
+        <input
+          type="text"
+          name="lamdavis"
+          className="form-control"
+          id="lamdavis"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="lamdair">
+          λ<sub>IR</sub>(nm) :
+        </label>
+        <small id="lamdairHelp" className="form-text text-muted">
+          (Wavelength of IR light)
+        </small>
+        <input
+          type="text"
+          name="lamdair"
+          className="form-control"
+          id="lamdair"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="betavis">
+          β<sub>VIS</sub>(°) :
+        </label>
+        <small id="betavisHelp" className="form-text text-muted">
+          (Incident angle of visible light)
+        </small>
+        <input
+          type="range"
+          name="betavis"
+          id="betavis"
+          className="custom-range"
+          min={0}
+          max={90}
+          step="0.1"
+        />
+        <input
+          type="text"
+          id="betavisValue"
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="betair">
+          β<sub>IR</sub>(°) :
+        </label>
+        <small id="betairHelp" className="form-text text-muted">
+          (Incident angle of IR light)
+        </small>
+        <input
+          type="range"
+          name="betair"
+          id="betair"
+          className="custom-range"
+          min={0}
+          max={90}
+          step="0.1"
+        />
+        <input
+          type="text"
+          id="betairValue"
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="betasfgValue">
+          β<sub>SFG</sub>(°) :
+        </label>
+        <input
+          readOnly
+          type='text'
+          id="betasfgValue"
+          className="form-control"
+        />
+      </div>
     </form>
   )
 }
