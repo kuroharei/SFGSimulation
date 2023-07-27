@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'bootstrap/dist/js/bootstrap.min.js.map'
+import 'bootstrap-select/dist/css/bootstrap-select.min.css'
+import 'bootstrap-select/dist/js/bootstrap-select.min.js'
+import 'bootstrap-select/dist/js/bootstrap-select.min.js.map'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

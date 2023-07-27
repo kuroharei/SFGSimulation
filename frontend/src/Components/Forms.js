@@ -1,58 +1,203 @@
 
-export function ParamsForm() {
+export function MediumForm() {
   return (
   <form>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <div className="mb-3">
+      <label htmlFor="n1sfg">
+        n<sub>ⅠSFG</sub> :
+      </label>
+      <small id="n1sfgHelp" className="form-text text-white-50">
+        (Refractive index of SFG light in medium Ⅰ)
+      </small>
+      <input
+        type="text"
+        name="n1sfg"
+        className="form-control"
+        id="n1sfg"
+      />
     </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1"/>
+    <div className="mb-3">
+      <label htmlFor="n1vis">
+        n<sub>ⅠVIS</sub> :
+      </label>
+      <small id="n1visHelp" className="form-text text-white-50">
+        (Refractive index of visible light in medium Ⅰ)
+      </small>
+      <input
+        type="text"
+        name="n1vis"
+        className="form-control"
+        id="n1vis"
+      />
     </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <div className="mb-3">
+      <label htmlFor="n1ir">
+        n<sub>ⅠIR</sub> :
+      </label>
+      <small id="n1irHelp" className="form-text text-white-50">
+        (Refractive index of IR light in medium Ⅰ)
+      </small>
+      <input
+        type="text"
+        name="n1ir"
+        className="form-control"
+        id="n1ir"
+      />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div className="mb-3">
+      <label htmlFor="n2sfg">
+        n<sub>ⅡSFG</sub> :
+      </label>
+      <small id="n2sfgHelp" className="form-text text-white-50">
+        (Refractive index of SFG light in medium Ⅱ)
+      </small>
+      <input
+        type="text"
+        name="n2sfg"
+        className="form-control"
+        id="n2sfg"
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="n2vis">
+        n<sub>ⅡVIS</sub> :
+      </label>
+      <small id="n2visHelp" className="form-text text-white-50">
+        (Refractive index of visible light in medium Ⅱ)
+      </small>
+      <input
+        type="text"
+        name="n2vis"
+        className="form-control"
+        id="n2vis"
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="n2ir">
+        n<sub>ⅡIR</sub> :
+      </label>
+      <small id="n2irHelp" className="form-text text-white-50">
+        (Refractive index of IR light in medium Ⅱ)
+      </small>
+      <input
+        type="text"
+        name="n2ir"
+        className="form-control"
+        id="n2ir"
+      />
+    </div>
   </form>
   )
 }
 
-export function SymmetryForm() {
+export function MolecularForm() {
   return (
-<form>
-  <fieldset disabled>
-    <legend>Disabled fieldset example</legend>
-    <div class="mb-3">
-      <label for="disabledTextInput" class="form-label">Disabled input</label>
-      <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input"/>
-    </div>
-    <div class="mb-3">
-      <label for="disabledSelect" class="form-label">Disabled select menu</label>
-      <select id="disabledSelect" class="form-select">
-        <option>Disabled select</option>
+    <form>
+      <label htmlFor="FWHM">Δθ(°) :</label>
+      <small id="FWHMHelp" className="form-text text-muted">
+        (Distribution width of orientational angle θ)
+      </small>
+      <input
+        type="text"
+        name="FWHM"
+        className="form-control"
+        id="FWHM"
+      />
+      <label htmlFor="symmetry">
+        Symmetry
+      </label>
+      <small id="symmetryHelp" className="form-text text-white-50">
+        (Symmetry of molecule)
+      </small>
+      <select
+        name="symmetry"
+        className="form-control selectpicker"
+        id="symmetry-controller"
+      >
+        <option id="C3v-select" value="C3v" data-content="C<sub>3v</sub>" />
+        <option id="C2v-select" value="C2v" data-content="C<sub>2v</sub>" />
+        <option id="Cinfv-select" value="Cinfv" data-content="C<sub>∞v</sub>" />
       </select>
-    </div>
-    <div class="mb-3">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled/>
-        <label class="form-check-label" for="disabledFieldsetCheck">
-          Can't check this
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </fieldset>
-</form>
+    </form>
   )
 }
 
-export function ConfigurationForm() {
+export function LightForm() {
   return (
     <form>
-
+      <label htmlFor="lamdavis">
+        λ<sub>VIS</sub>(nm) :
+      </label>
+      <small id="lamdavisHelp" className="form-text text-muted">
+        (Wavelength of visible light)
+      </small>
+      <input
+        type="text"
+        name="lamdavis"
+        className="form-control"
+        id="lamdavis"
+      />
+      <label htmlFor="lamdair">
+        λ<sub>IR</sub>(nm) :
+      </label>
+      <small id="lamdairHelp" className="form-text text-muted">
+        (Wavelength of IR light)
+      </small>
+      <input
+        type="text"
+        name="lamdair"
+        className="form-control"
+        id="lamdair"
+      />
+      <label htmlFor="betavis">
+        β<sub>VIS</sub>(°) :
+      </label>
+      <small id="betavisHelp" className="form-text text-muted">
+        (Incident angle of visible light)
+      </small>
+      <input
+        type="range"
+        name="betavis"
+        id="betavis"
+        className="custom-range"
+        min={0}
+        max={90}
+        step="0.1"
+      />
+      <input
+        type="text"
+        id="betavisValue"
+        className="form-control"
+      />
+      <label htmlFor="betair">
+        β<sub>IR</sub>(°) :
+      </label>
+      <small id="betairHelp" className="form-text text-muted">
+        (Incident angle of IR light)
+      </small>
+      <input
+        type="range"
+        name="betair"
+        id="betair"
+        className="custom-range"
+        min={0}
+        max={90}
+        step="0.1"
+      />
+      <input
+        type="text"
+        id="betairValue"
+        className="form-control"
+      />
+      <label htmlFor="betasfgValue">
+        β<sub>SFG</sub>(°) :
+      </label>
+      <input
+        readOnly
+        type='text'
+        id="betasfgValue"
+        className="form-control"
+      />
     </form>
   )
 }
