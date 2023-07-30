@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+import Canvas, { ConfigurationCanvas } from './Canvas'
 
 export function MediumForm() {
   return (
@@ -91,6 +93,8 @@ export function MediumForm() {
 }
 
 export function MolecularForm() {
+  const [symmetry, setSymmetry] = useState('C3v');
+
   return (
     <form>
       <div className="mb-3">
@@ -116,17 +120,30 @@ export function MolecularForm() {
           name="symmetry"
           className="form-control selectpicker"
           id="symmetry-controller"
+          value={symmetry}
+          onChange={e => setSymmetry(e.target.value)}
         >
-          <option id="C3v-select" value="C3v" data-content="C<sub>3v</sub>" />
+          <option id="C3v-select" value="C3v" selected data-content="C<sub>3v</sub>" />
           <option id="C2v-select" value="C2v" data-content="C<sub>2v</sub>" />
           <option id="Cinfv-select" value="Cinfv" data-content="C<sub>∞v</sub>" />
         </select>
       </div>
+      <SymmetryForm symmetry={symmetry}/>
     </form>
   )
 }
 
 export function LightForm() {
+  const [betavis, setBetavis] = useState(60);
+  const [betair, setBetair] = useState(55);
+  const [lamdavis, setLamdavis] = useState(532);
+  const [lamdair, setLamdair] = useState(3378);
+
+  function calcBetasfg(beta1, beta2, lamda1, lamda2) {
+    var lamda = lamda1 * lamda2 / (lamda1 + lamda2);
+    return (Math.asin(lamda * (Math.sin(beta1 * Math.PI / 180) / lamda1 + Math.sin(beta2 * Math.PI / 180) / lamda2)) * 180 / Math.PI).toFixed(1)
+  }
+
   return (
     <form>
       <div className="mb-3">
@@ -141,6 +158,8 @@ export function LightForm() {
           name="lamdavis"
           className="form-control"
           id="lamdavis"
+          value={lamdavis}
+          onChange={e => setLamdavis(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -155,6 +174,8 @@ export function LightForm() {
           name="lamdair"
           className="form-control"
           id="lamdair"
+          value={lamdair}
+          onChange={e => setLamdair(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -172,11 +193,15 @@ export function LightForm() {
           min={0}
           max={90}
           step="0.1"
+          value={betavis}
+          onChange={e => setBetavis(e.target.value)}
         />
         <input
           type="text"
           id="betavisValue"
           className="form-control"
+          value={betavis}
+          onChange={e => setBetavis(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -194,11 +219,15 @@ export function LightForm() {
           min={0}
           max={90}
           step="0.1"
+          value={betair}
+          onChange={e => setBetair(e.target.value)}
         />
         <input
           type="text"
           id="betairValue"
           className="form-control"
+          value={betair}
+          onChange={e => setBetair(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -210,8 +239,76 @@ export function LightForm() {
           type='text'
           id="betasfgValue"
           className="form-control"
+          value={calcBetasfg(betavis, betair, lamdavis, lamdair)}
         />
       </div>
+      <ConfigurationCanvas
+        width={300}
+        height={300}
+        betavis={betavis}
+        betair={betair}
+        lamdavis={lamdavis}
+        lamdair={lamdair}
+      />
     </form>
   )
+}
+
+const SymmetryForm = ({symmetry}) => {
+  if(symmetry === "C3v") {
+    return (
+      <div id="C3v" className="mb-3">
+        <label htmlFor="R">R :</label>
+        <small id="RHelp" className="form-text text-muted">
+          (Hyperpolarizability ratios)
+        </small>
+        <input
+          type="text"
+          name="R"
+          className="form-control"
+        />
+      </div>
+    )
+  } else if(symmetry === "C2v") {
+    return (
+      <div id="C2v">
+        <div className="mb-3">
+          <label htmlFor="tau">τ(°) :</label>
+          <small id="tauHelp" className="form-text text-muted">
+            (Bond angle)
+          </small>
+          <input
+            type="text"
+            name="tau"
+            className="form-control"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="r">r :</label>
+          <small id="rC2vHelp" className="form-text text-muted">
+            (Single bond polarizability derivative ratio)
+          </small>
+          <input
+            type="text"
+            name="rC2v"
+            className="form-control"
+          />
+        </div>
+      </div>
+    )
+  } else if(symmetry === "Cinfv") {
+    return (
+      <div id="Cinfv" className="mb-3">
+        <label htmlFor="r">r :</label>
+        <small id="rCinfvHelp" className="form-text text-muted">
+          (Single bond polarizability derivative ratio)
+        </small>
+        <input
+          type="text"
+          name="rCinfv"
+          className="form-control"
+        />
+      </div>
+    )
+  }
 }

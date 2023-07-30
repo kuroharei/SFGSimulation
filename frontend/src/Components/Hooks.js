@@ -76,3 +76,19 @@ export function useOnDraw(onDraw) {
     onMouseDown
   }
 };
+
+export function useDrawConfiguration(drawConfiguration, betavis, betair, lamdavis, lamdair) {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = canvasRef.current.getContext('2d');
+    drawConfiguration(betavis, betair, lamdavis, lamdair, ctx);
+  }, [drawConfiguration])
+
+
+  function setCanvasRef(ref) {
+    canvasRef.current = ref;
+  }
+
+  return setCanvasRef
+}

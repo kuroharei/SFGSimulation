@@ -7,7 +7,7 @@ function App() {
 
 
   return (
-    <div className="App container-lg">
+    <div className="App">
       <Simulation/>
       {/* <Canvas
         width={700}
