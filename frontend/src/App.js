@@ -2,17 +2,13 @@ import './App.css';
 import Canvas from './Components/Canvas';
 import {useState, useEffect} from 'react';
 import Simulation from './Components/Simulation';
+import Navbars from './Components/Navbars';
 
 function App() {
-
-
   return (
     <div className="App">
+      <Navbars/>
       <Simulation/>
-      {/* <Canvas
-        width={700}
-        height={500}
-      /> */}
     </div>
   );
 }

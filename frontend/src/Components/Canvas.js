@@ -197,3 +197,7 @@ export default Canvas
 const canvasStyle = {
     border: "1px solid white"
 }
+
+// const configurationCanvasStyle = {
+//   backgroud-color: white
+// }

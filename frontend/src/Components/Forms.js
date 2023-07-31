@@ -159,7 +159,7 @@ export function LightForm() {
           className="form-control"
           id="lamdavis"
           value={lamdavis}
-          onChange={e => setLamdavis(e.target.value)}
+          onChange={e => setLamdavis(Number(e.target.value))}
         />
       </div>
       <div className="mb-3">
@@ -175,7 +175,7 @@ export function LightForm() {
           className="form-control"
           id="lamdair"
           value={lamdair}
-          onChange={e => setLamdair(e.target.value)}
+          onChange={e => setLamdair(Number(e.target.value))}
         />
       </div>
       <div className="mb-3">
