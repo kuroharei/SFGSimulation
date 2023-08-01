@@ -1,6 +1,4 @@
 import './App.css';
-import Canvas from './Components/Canvas';
-import {useState, useEffect} from 'react';
 import Simulation from './Components/Simulation';
 import Navbars from './Components/Navbars';
 

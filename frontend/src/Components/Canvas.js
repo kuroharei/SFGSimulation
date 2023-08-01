@@ -1,6 +1,5 @@
 import React from 'react'
 import {useDrawConfiguration, useOnDraw} from './Hooks'
-import {useRef} from 'react'
 
 
 const Canvas = ({
@@ -186,7 +185,7 @@ export const ConfigurationCanvas = ({
     <canvas
       width={width}
       height={height}
-      style={canvasStyle}
+      style={configurationCanvasStyle}
       ref={setCanvasRef}
     />
   )
@@ -195,9 +194,10 @@ export const ConfigurationCanvas = ({
 export default Canvas
 
 const canvasStyle = {
-    border: "1px solid white"
+  border: "1px solid white"
 }
 
-// const configurationCanvasStyle = {
-//   backgroud-color: white
-// }
+const configurationCanvasStyle = {
+  backgroundColor: "white",
+  justifyContent: "center"
+}
