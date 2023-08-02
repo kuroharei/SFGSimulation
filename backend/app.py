@@ -6,11 +6,16 @@ from io import BytesIO
 from matplotlib.figure import Figure
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
+import json
 
 app = Flask(__name__)
 CORS(app)
 
 ma = Marshmallow(app)
+
+@app.route('/')
+def hello():
+    return jsonify({"Hello": "World"})
 
 @app.route('/get', methods = ['GET'])
 def get_graph():
@@ -19,19 +24,19 @@ def get_graph():
 @app.route("/calculation", methods=["POST"])
 def calculation():
     # theta_distribution = request.form.get('distribution')
-    symmetry = request.form.get('symmetry')
-    FWHM = float(request.form.get('FWHM'))
+    symmetry = request.json['symmetry']
+    FWHM = float(request.json['FWHM'])
     w = [FWHM / 180 * np.pi]
     theta_distribution = 'delta' if FWHM == 0 else 'gaussian'
-    lamda = [float(request.form.get('lamdavis')), float(request.form.get('lamdair'))]
-    betavis = request.form.get('betavis')
-    betair = request.form.get('betair')
+    lamda = [float(request.json['lamdavis']), float(request.json['lamdair'])]
+    betavis = request.json['betavis']
+    betair = request.json['betair']
     beta = list(map(lambda deg : np.pi * float(deg) / 180, [betavis, betair]))
-    n1 = [float(request.form.get('n1sfg')), float(request.form.get('n1vis')), float(request.form.get('n1ir'))]
-    n2 = [float(request.form.get('n2sfg')), float(request.form.get('n2vis')), float(request.form.get('n2ir'))]
+    n1 = [float(request.json['n1sfg']), float(request.json['n1vis']), float(request.json['n1ir'])]
+    n2 = [float(request.json['n2sfg']), float(request.json['n2vis']), float(request.json['n2ir'])]
 
     if symmetry == "C3v":
-        R = float(request.form.get('R'))
+        R = float(request.json['R'])
         sample = C3v(lamda=lamda, beta=beta, n1=n1, n2=n2, R=R, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
@@ -76,33 +81,20 @@ def calculation():
         buf = BytesIO()
         fig.savefig(buf, format="png")
         graph = base64.b64encode(buf.getbuffer()).decode("ascii")
-        param = {"ss" : {"ssp" : {"d" : sample.sspssd, "c" : sample.sspssc},
-                         "sps" : {"d" : sample.spsssd, "c" : sample.spsssc},
-                         "pss" : {"d" : sample.pssssd, "c" : sample.pssssc},
-                         "ppp" : {"d" : sample.pppssd, "c" : sample.pppssc}},
-                 "as" : {"ssp" : {"d" : sample.sspasd, "c" : sample.sspasc},
-                         "sps" : {"d" : sample.spsasd, "c" : sample.spsasc},
-                         "pss" : {"d" : sample.pssasd, "c" : sample.pssasc},
-                         "ppp" : {"d" : sample.pppasd, "c" : sample.pppasc}}}
-        return render_template("simulation.html", symmetry=symmetry,
-                                                  FWHM=FWHM,
-                                                  lamdavis=lamda[0],
-                                                  lamdair=lamda[1],
-                                                  betavis=betavis,
-                                                  betair=betair,
-                                                  n1sfg=n1[0],
-                                                  n1vis=n1[1],
-                                                  n1ir=n1[2],
-                                                  n2sfg=n2[0],
-                                                  n2vis=n2[1],
-                                                  n2ir=n2[2],
-                                                  R=R,
-                                                  graph=graph,
-                                                  param=param)
+        param = {"ss" : {"ssp" : {"d" : float(sample.sspssd), "c" : float(sample.sspssc)},
+                         "sps" : {"d" : float(sample.spsssd), "c" : float(sample.spsssc)},
+                         "pss" : {"d" : float(sample.pssssd), "c" : float(sample.pssssc)},
+                         "ppp" : {"d" : float(sample.pppssd), "c" : float(sample.pppssc)}},
+                 "as" : {"ssp" : {"d" : float(sample.sspasd), "c" : float(sample.sspasc)},
+                         "sps" : {"d" : float(sample.spsasd), "c" : float(sample.spsasc)},
+                         "pss" : {"d" : float(sample.pssasd), "c" : float(sample.pssasc)},
+                         "ppp" : {"d" : float(sample.pppasd), "c" : float(sample.pppasc)}}}
+        return jsonify({"graph": graph,
+                        "param": param})
 
     if symmetry == "C2v":
-        r = float(request.form.get('rC2v'))
-        tau = float(request.form.get('tau'))
+        r = float(request.json['rC2v'])
+        tau = float(request.json['tau'])
         sample = C2v(lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, tau=tau, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
@@ -147,33 +139,19 @@ def calculation():
         buf = BytesIO()
         fig.savefig(buf, format="png")
         graph = base64.b64encode(buf.getbuffer()).decode("ascii")
-        param = {"ss" : {"ssp" : {"d" : sample.sspssd, "c" : sample.sspssc},
-                         "sps" : {"d" : sample.spsssd, "c" : sample.spsssc},
-                         "pss" : {"d" : sample.pssssd, "c" : sample.pssssc},
-                         "ppp" : {"d" : sample.pppssd, "c" : sample.pppssc}},
-                 "as" : {"ssp" : {"d" : sample.sspasd, "c" : sample.sspasc},
-                         "sps" : {"d" : sample.spsasd, "c" : sample.spsasc},
-                         "pss" : {"d" : sample.pssasd, "c" : sample.pssasc},
-                         "ppp" : {"d" : sample.pppasd, "c" : sample.pppasc}}}
-        return render_template("simulation.html", symmetry=symmetry,
-                                                  FWHM=FWHM,
-                                                  lamdavis=lamda[0],
-                                                  lamdair=lamda[1],
-                                                  betavis=betavis,
-                                                  betair=betair,
-                                                  n1sfg=n1[0],
-                                                  n1vis=n1[1],
-                                                  n1ir=n1[2],
-                                                  n2sfg=n2[0],
-                                                  n2vis=n2[1],
-                                                  n2ir=n2[2],
-                                                  rC2v=r,
-                                                  tau=tau,
-                                                  graph=graph,
-                                                  param=param)
+        param = {"ss" : {"ssp" : {"d" : float(sample.sspssd), "c" : float(sample.sspssc)},
+                         "sps" : {"d" : float(sample.spsssd), "c" : float(sample.spsssc)},
+                         "pss" : {"d" : float(sample.pssssd), "c" : float(sample.pssssc)},
+                         "ppp" : {"d" : float(sample.pppssd), "c" : float(sample.pppssc)}},
+                 "as" : {"ssp" : {"d" : float(sample.sspasd), "c" : float(sample.sspasc)},
+                         "sps" : {"d" : float(sample.spsasd), "c" : float(sample.spsasc)},
+                         "pss" : {"d" : float(sample.pssasd), "c" : float(sample.pssasc)},
+                         "ppp" : {"d" : float(sample.pppasd), "c" : float(sample.pppasc)}}}
+        return jsonify({"graph": graph,
+                        "param": param})
     
     if symmetry == "Cinfv":
-        r = float(request.form.get('rCinfv'))
+        r = float(request.json['rCinfv'])
         sample = Cinfv(lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
@@ -202,25 +180,12 @@ def calculation():
         buf = BytesIO()
         fig.savefig(buf, format="png")
         graph = base64.b64encode(buf.getbuffer()).decode("ascii")
-        param = {"ss" : {"ssp" : {"d" : sample.sspssd, "c" : sample.sspssc},
-                         "sps" : {"d" : sample.spsssd, "c" : sample.spsssc},
-                         "pss" : {"d" : sample.pssssd, "c" : sample.pssssc},
-                         "ppp" : {"d" : sample.pppssd, "c" : sample.pppssc}}}
-        return render_template("simulation.html", symmetry=symmetry,
-                                                  FWHM=FWHM,
-                                                  lamdavis=lamda[0],
-                                                  lamdair=lamda[1],
-                                                  betavis=betavis,
-                                                  betair=betair,
-                                                  n1sfg=n1[0],
-                                                  n1vis=n1[1],
-                                                  n1ir=n1[2],
-                                                  n2sfg=n2[0],
-                                                  n2vis=n2[1],
-                                                  n2ir=n2[2],
-                                                  rCinfv=r,
-                                                  graph=graph,
-                                                  param=param)
+        param = {"ss" : {"ssp" : {"d" : float(sample.sspssd), "c" : float(sample.sspssc)},
+                         "sps" : {"d" : float(sample.spsssd), "c" : float(sample.spsssc)},
+                         "pss" : {"d" : float(sample.pssssd), "c" : float(sample.pssssc)},
+                         "ppp" : {"d" : float(sample.pppssd), "c" : float(sample.pppssc)}}}
+        return jsonify({"graph": graph,
+                        "param": param})
 
 
 if __name__ == "__main__":
