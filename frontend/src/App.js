@@ -5,8 +5,8 @@ import Navbars from './Components/Navbars';
 function App() {
   return (
     <div className="App">
-      <Navbars/>
-      <Simulation/>
+      <Navbars />
+      <Simulation />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react'
-import {useDrawConfiguration, useOnDraw} from './Hooks'
+import { useDrawConfiguration, useOnDraw } from './Hooks'
 
 
 const Canvas = ({
   width,
   height
 }) => {
-  
+
   const {
     onMouseDown,
     setCanvasRef
@@ -39,11 +39,11 @@ const Canvas = ({
 
   return (
     <canvas
-        width={width}
-        height={height}
-        onMouseDown={onMouseDown}
-        style={canvasStyle}
-        ref={setCanvasRef}
+      width={width}
+      height={height}
+      onMouseDown={onMouseDown}
+      style={canvasStyle}
+      ref={setCanvasRef}
     />
   )
 }
@@ -53,54 +53,58 @@ export const ConfigurationCanvas = ({
   height,
   betavis,
   betair,
-  lamdavis,
-  lamdair
+  betasfg
 }) => {
-  
-  const setCanvasRef = useDrawConfiguration(drawConfiguration, betavis, betair, lamdavis, lamdair);
 
-  function drawConfiguration(beta1, beta2, lamda1, lamda2, ctx) {
+  const setCanvasRef = useDrawConfiguration(drawConfiguration, betavis, betair, betasfg);
+
+  function drawConfiguration(beta1, beta2, beta, ctx) {
     var w = width;
     var h = height;
-    var lamda = lamda1 * lamda2 / (lamda1 + lamda2);
-    var beta = Math.asin(lamda * (Math.sin(beta1 * Math.PI / 180) / lamda1 + Math.sin(beta2 * Math.PI / 180) / lamda2)) * 180 / Math.PI
+    // var lamda = lamda1 * lamda2 / (lamda1 + lamda2);
+    // var beta = Math.asin(lamda * (Math.sin(beta1 * Math.PI / 180) / lamda1 + Math.sin(beta2 * Math.PI / 180) / lamda2)) * 180 / Math.PI;
     var beta1x = h / 2 * (1 - Math.sin(beta1 * Math.PI / 180));
     var beta1y = h / 2 * (1 - Math.cos(beta1 * Math.PI / 180));
-    
+
     var betaName1x = h * (1 / 2 - Math.sin(beta1 / 2 * Math.PI / 180) / 5);
     var betaName1y = h * (1 / 2 - Math.cos(beta1 / 2 * Math.PI / 180) / 5);
-    
+
     var beta2x = h / 2 * (1 - Math.sin(beta2 * Math.PI / 180));
     var beta2y = h / 2 * (1 - Math.cos(beta2 * Math.PI / 180));
     var betaName2x = h * (1 / 2 - Math.sin(beta2 / 2 * Math.PI / 180) / 9);
     var betaName2y = h * (1 / 2 - Math.cos(beta2 / 2 * Math.PI / 180) / 9);
-  
+
     var betax = h / 2 * (1 + Math.sin(beta * Math.PI / 180));
     var betay = h / 2 * (1 - Math.cos(beta * Math.PI / 180));
     var betaNamex = h * (1 / 2 + Math.sin(beta / 2 * Math.PI / 180) / 7);
     var betaNamey = h * (1 / 2 - Math.cos(beta / 2 * Math.PI / 180) / 7);
-  
+
 
     ctx.clearRect(0, 0, w, h);
 
+    // draw axes
     drawLineArrow(0, h / 2, w, h / 2, 1, "#000000");
     drawLineArrow(w / 2, h, w / 2, 0, 1, "#000000");
 
+    // draw VIS
     drawLineArrow(beta1x, beta1y, w / 2, h / 2, 0.5, "#00ff00");
-    drawArcArrow(w / 2, h / 2, h / 5, 3 / 2 * Math.PI, (270 - beta1) * Math.PI / 180, true, "#00ff00");
+    drawArcArrow(w / 2, h / 2, h / 5, - 1 / 2 * Math.PI, (-90 - beta1) * Math.PI / 180, true, "#00ff00");
     drawText(betaName1x, betaName1y, "\u03b2", "VIS", 5, 0, "#00ff00");
     // drawText(betaName1x, betaName1y + 1, "="+beta1+"\u00b0", "", 0, 2, "#00ff00");
-    
+
+    // draw IR
     drawLineArrow(beta2x, beta2y, w / 2, h / 2, 0.5, "#ff0000");
-    drawArcArrow(w / 2, h / 2, h / 9, 3 / 2 * Math.PI, (270 - beta2) * Math.PI / 180, true, "#ff0000");
+    drawArcArrow(w / 2, h / 2, h / 9, - 1 / 2 * Math.PI, (-90 - beta2) * Math.PI / 180, true, "#ff0000");
     drawText(betaName2x, betaName2y, "\u03b2", "IR", 5, 0, "#ff0000");
-    
+
+    // draw SFG
     drawLineArrow(w / 2, h / 2, betax, betay, 0.5, "#0000ff");
-    drawArcArrow(w / 2, h / 2, h / 7, 3 / 2 * Math.PI, (270 + beta) * Math.PI / 180, false, "#0000ff");
+    drawArcArrow(w / 2, h / 2, h / 7, - 1 / 2 * Math.PI, (-90 + beta) * Math.PI / 180, false, "#0000ff");
     drawText(betaNamex, betaNamey, "\u03b2", "SFG", 5, 0, "#0000ff");
 
     // drawArcArrow(w / 2, h / 2, h / 7, Math.PI / 2, (90 - gamma) * Math.PI / 180, true, "#00ffff");
 
+    // draw media indices
     drawText(w - 50, h / 2 - 30, "\u2160", "", 0, 0, "#000000");
     drawText(w - 50, h / 2 + 50, "\u2161", "", 0, 0, "#000000");
 
@@ -119,23 +123,23 @@ export const ConfigurationCanvas = ({
       ctx.beginPath();
       //画直线
       ctx.moveTo(fromX, fromY);
-      ctx.lineTo(toX , toY);
-    
+      ctx.lineTo(toX, toY);
+
       arrowX = toX + topX - (toX - fromX) * (1 - arrowPos);
       arrowY = toY + topY - (toY - fromY) * (1 - arrowPos);
       //画上边箭头线
       ctx.moveTo(arrowX, arrowY);
-      ctx.lineTo(toX - (toX - fromX) * (1 - arrowPos), toY- (toY - fromY) * (1 - arrowPos));
-    
+      ctx.lineTo(toX - (toX - fromX) * (1 - arrowPos), toY - (toY - fromY) * (1 - arrowPos));
+
       arrowX = toX + botX - (toX - fromX) * (1 - arrowPos);
       arrowY = toY + botY - (toY - fromY) * (1 - arrowPos);
       //画下边箭头线
       ctx.lineTo(arrowX, arrowY);
-      
+
       ctx.strokeStyle = color;
       ctx.stroke();
     }
-    
+
     function drawArcArrow(x, y, radius, startAngle, endAngle, anticlockwise, color) {
       var headlen = 10;//自定义箭头线的长度
       var theta = 30;//自定义箭头线与直线的夹角
@@ -153,23 +157,23 @@ export const ConfigurationCanvas = ({
       ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
       var toX = x + radius * Math.cos(endAngle);
       var toY = y + radius * Math.sin(endAngle);
-    
+
       arrowX = toX + topX;
       arrowY = toY + topY;
       //画上边箭头线
       ctx.moveTo(arrowX, arrowY);
       ctx.lineTo(toX, toY);
-    
+
       arrowX = toX + botX;
       arrowY = toY + botY;
       //画下边箭头线
       ctx.lineTo(arrowX, arrowY);
-      
+
       ctx.strokeStyle = color;
       ctx.stroke();
     }
-    
-    function drawText(x, y, text, subtext, subtextShiftx, subtextShifty,color) {
+
+    function drawText(x, y, text, subtext, subtextShiftx, subtextShifty, color) {
       ctx.fillStyle = color;
       ctx.textBaseline = "bottom";
       ctx.textAlign = "center";

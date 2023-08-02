@@ -77,13 +77,13 @@ export function useOnDraw(onDraw) {
   }
 };
 
-export function useDrawConfiguration(drawConfiguration, betavis, betair, lamdavis, lamdair) {
+export function useDrawConfiguration(drawConfiguration, betavis, betair, betasfg) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const ctx = canvasRef.current.getContext('2d');
-    drawConfiguration(betavis, betair, lamdavis, lamdair, ctx);
-  }, [drawConfiguration])
+    drawConfiguration(betavis, betair, betasfg, ctx);
+  }, [betair, betasfg, betavis, drawConfiguration])
 
 
   function setCanvasRef(ref) {
