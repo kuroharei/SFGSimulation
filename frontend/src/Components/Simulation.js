@@ -1,6 +1,8 @@
 import React, { useEffect, useState} from 'react'
 import { MediumForm, MolecularForm, LightForm } from './Forms'
 import APIService from './APIService';
+import { ResultTable } from './Table';
+import { ResultGraph } from './Graph';
 
 
 function Simulation() {
@@ -21,6 +23,8 @@ function Simulation() {
     const [betair, setBetair] = useState(55);
     const [lamdavis, setLamdavis] = useState(532);
     const [lamdair, setLamdair] = useState(3378);
+    const [param, setParam] = useState(null);
+    const [graph, setGraph] = useState(null)
 
     const calculate = () => {
         APIService.Calculate({
@@ -41,7 +45,10 @@ function Simulation() {
             lamdavis,
             lamdair
         })
-        .then(resp => console.log(resp))
+        .then(resp => {
+            setGraph(resp.graph); 
+            setParam(resp.param)
+        })
         .catch(error => console.log(error))
     }
 
@@ -131,6 +138,12 @@ function Simulation() {
             </div>
             <div className='row mb-3 justify-content-center'>
                 <button className='btn btn-outline-light btn-lg' type='submit' onClick={calculate}>Calculate</button>
+            </div>
+            <div className='row mb-3 justify-content-center'>
+                <ResultTable param={param}/>
+            </div>
+            <div className='row mb-3 justify-content-center'>
+                <ResultGraph graph={graph}/>
             </div>
         </div>
     )
