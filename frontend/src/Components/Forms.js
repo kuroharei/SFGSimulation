@@ -27,7 +27,7 @@ export function MolecularForm({
           className="form-control"
           id="FWHM"
           value={FWHM}
-          onChange={e => setFWHM(Number(e.target.value))}
+          onChange={e => setFWHM(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -95,7 +95,7 @@ export function MediumForm({
           className="form-control"
           id="n1sfg"
           value={n1sfg}
-          onChange={e => setn1sfg(Number(e.target.value))}
+          onChange={e => setn1sfg(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -111,7 +111,7 @@ export function MediumForm({
           className="form-control"
           id="n1vis"
           value={n1vis}
-          onChange={e => setn1vis(Number(e.target.value))}
+          onChange={e => setn1vis(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -127,7 +127,7 @@ export function MediumForm({
           className="form-control"
           id="n1ir"
           value={n1ir}
-          onChange={e => setn1ir(Number(e.target.value))}
+          onChange={e => setn1ir(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -143,7 +143,7 @@ export function MediumForm({
           className="form-control"
           id="n2sfg"
           value={n2sfg}
-          onChange={e => setn2sfg(Number(e.target.value))}
+          onChange={e => setn2sfg(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -159,7 +159,7 @@ export function MediumForm({
           className="form-control"
           id="n2vis"
           value={n2vis}
-          onChange={e => setn2vis(Number(e.target.value))}
+          onChange={e => setn2vis(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -175,7 +175,7 @@ export function MediumForm({
           className="form-control"
           id="n2ir"
           value={n2ir}
-          onChange={e => setn2ir(Number(e.target.value))}
+          onChange={e => setn2ir(e.target.value)}
         />
       </div>
     </form>
@@ -194,9 +194,19 @@ export function LightForm({
   setLamdair
 }) {
 
-  function calcBetasfg(beta1, beta2, lamda1, lamda2) {
-    var lamda = lamda1 * lamda2 / (lamda1 + lamda2);
-    return Number((Math.asin(lamda * (Math.sin(beta1 * Math.PI / 180) / lamda1 + Math.sin(beta2 * Math.PI / 180) / lamda2)) * 180 / Math.PI).toFixed(1))
+  function calcBetasfg(beta1, beta2, lambda1, lambda2) {
+    const lamda1 = Number(lambda1);
+    const lamda2 = Number(lambda2);
+    const lamda = lamda1 * lamda2 / (lamda1 + lamda2);
+    return Number((Math.asin(lamda * (Math.sin(beta1 * Math.PI / 180) / lamda1 + Math.sin(beta2 * Math.PI / 180) / lamda2)) * 180 / Math.PI).toFixed(1));
+  }
+
+  function calcWavelength(wavenumber) {
+    return 1e7 / wavenumber;
+  }
+
+  function calcWavenumber(wavelength) {
+    return 1e7 / wavelength;
   }
 
   return (
@@ -214,7 +224,7 @@ export function LightForm({
           className="form-control"
           id="lamdavis"
           value={lamdavis}
-          onChange={e => setLamdavis(Number(e.target.value))}
+          onChange={e => setLamdavis(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -230,7 +240,7 @@ export function LightForm({
           className="form-control"
           id="lamdair"
           value={lamdair}
-          onChange={e => setLamdair(Number(e.target.value))}
+          onChange={e => setLamdair(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -249,14 +259,14 @@ export function LightForm({
           max={90}
           step="0.1"
           value={betavis}
-          onChange={e => setBetavis(Number(e.target.value))}
+          onChange={e => setBetavis(e.target.value)}
         />
         <input
           type="text"
           id="betavisValue"
           className="form-control"
           value={betavis}
-          onChange={e => setBetavis(Number(e.target.value))}
+          onChange={e => setBetavis(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -275,14 +285,14 @@ export function LightForm({
           max={90}
           step="0.1"
           value={betair}
-          onChange={e => setBetair(Number(e.target.value))}
+          onChange={e => setBetair(e.target.value)}
         />
         <input
           type="text"
           id="betairValue"
           className="form-control"
           value={betair}
-          onChange={e => setBetair(Number(e.target.value))}
+          onChange={e => setBetair(e.target.value)}
         />
       </div>
       <div className="mb-3">
@@ -332,7 +342,7 @@ const SymmetryForm = ({
           name="R"
           className="form-control"
           value={R}
-          onChange={e => setR(Number(e.target.value))}
+          onChange={e => setR(e.target.value)}
         />
       </div>
     )
@@ -349,7 +359,7 @@ const SymmetryForm = ({
             name="tau"
             className="form-control"
             value={tau}
-            onChange={e => settau(Number(e.target.value))}
+            onChange={e => settau(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -362,7 +372,7 @@ const SymmetryForm = ({
             name="rC2v"
             className="form-control"
             value={rC2v}
-            onChange={e => setrC2v(Number(e.target.value))}
+            onChange={e => setrC2v(e.target.value)}
           />
         </div>
       </div>
@@ -379,7 +389,7 @@ const SymmetryForm = ({
           name="rCinfv"
           className="form-control"
           value={rCinfv}
-          onChange={e => setrCinfv(Number(e.target.value))}
+          onChange={e => setrCinfv(e.target.value)}
         />
       </div>
     )

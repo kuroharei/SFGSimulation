@@ -129,10 +129,10 @@ class Sample:
         return np.array([self.pssasd, self.pssasc])
     
     def pppasParam(self, squarecospsi, squaresinpsi):
-        a = np.array([-self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]),
-                      -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) * np.cos(self.beta[0]) * np.sin(self.beta[1]),
-                      +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) * np.sin(self.beta[0]) * np.cos(self.beta[1]),
-                      +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1])])
+        a = np.array([-self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]) * np.sin(self.beta[2]),
+                      -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) * np.cos(self.beta[0]) * np.sin(self.beta[1]) * np.cos(self.beta[2]),
+                      +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) * np.sin(self.beta[0]) * np.cos(self.beta[1]) * np.cos(self.beta[2]),
+                      +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1]) * np.sin(self.beta[2])])
         d, c = np.array([self.xxzasParam(squarecospsi, squaresinpsi),
                          self.xzxasParam(squarecospsi, squaresinpsi),
                          self.zxxasParam(squarecospsi, squaresinpsi),
@@ -286,6 +286,8 @@ class C2v(Sample):
         return self.xxzasParam(squarecospsi, squaresinpsi)
 
     def xzxasParam(self, squarecospsi, squaresinpsi):
+        if squarecospsi - squaresinpsi == 0:
+            return [-1e-100, (1e100/2)]
         return np.array([(squarecospsi - squaresinpsi) / 2, - 2 * squaresinpsi / (squarecospsi - squaresinpsi)])
     
     def zxxasParam(self, squarecospsi, squaresinpsi):
@@ -329,22 +331,22 @@ class C3v(Sample):
         return np.array([self.R, - (1 - self.R) / self.R])
     
     def xxzasParam(self, squarecospsi, squaresinpsi):
-        return np.array([-1, 1])
+        return np.array([-1.0, 1.0])
     
     def yyzasParam(self, squarecospsi, squaresinpsi):
-        return self.xxzasParam(squarecospsi, squaresinpsi)
+        return np.array([-1.0, 1.0])
     
     def xzxasParam(self, squarecospsi, squaresinpsi):
-        return np.array([-1e-30, 1e30])
+        return np.array([-1e-100, 1e100])
 
     def zxxasParam(self, squarecospsi, squaresinpsi):
-        return self.xzxasParam(squarecospsi, squaresinpsi)
+        return np.array([-1e-100, 1e100])
     
     def yzyasParam(self, squarecospsi, squaresinpsi):
-        return self.xzxasParam(squarecospsi, squaresinpsi)
+        return np.array([-1e-100, 1e100])
     
     def zyyasParam(self, squarecospsi, squaresinpsi):
-        return self.xzxasParam(squarecospsi, squaresinpsi)
+        return np.array([-1e-100, 1e100])
     
     def zzzasParam(self, squarecospsi, squaresinpsi):
         return np.array([2, 1])

@@ -1,7 +1,6 @@
 import React from 'react'
 
 export function ResultTable({param}) {
-    console.log(param);
     if (param) {
         return (
             <table className="table table-bordered text-white text-center">
@@ -41,7 +40,7 @@ export function ResultTable({param}) {
                             return (
                                 <React.StrictMode>
                                     {Object.keys(param[sym]).map((pol) => {
-                                        if(Math.abs(param[sym][pol]['c']) > 1e20) {
+                                        if(Math.abs(param[sym][pol]['c']) > 1e9) {
                                             return (
                                                 <td>{(param[sym][pol]['d'] * param[sym][pol]['c']).toFixed(2)}<sup>*</sup></td>
                                             )
@@ -61,7 +60,7 @@ export function ResultTable({param}) {
                             return (
                                 <React.StrictMode>
                                     {Object.keys(param[sym]).map((pol) => {
-                                        if(Math.abs(param[sym][pol]['c']) > 1e20) {
+                                        if(Math.abs(param[sym][pol]['c']) > 1e9) {
                                             return (
                                                 <td>&infin;</td>
                                             )
