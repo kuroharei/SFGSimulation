@@ -1,10 +1,8 @@
 from flask import Flask, jsonify, request, Response, redirect, render_template, url_for
-from markupsafe import Markup
 from model import *
 import base64
 from io import BytesIO
 from matplotlib.figure import Figure
-from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 import json
 
@@ -12,15 +10,9 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-ma = Marshmallow(app)
-
 @app.route('/')
 def main():
     return render_template("index.html")
-
-@app.route('/get', methods = ['GET'])
-def get_graph():
-    return jsonify({"Hello": "World"})
 
 @app.route("/calculation", methods=["POST"])
 def calculation():
