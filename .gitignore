@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /.vscode
-/__pycache__
-/test.py
+/backend/__pycache__
+/backend/test.py
