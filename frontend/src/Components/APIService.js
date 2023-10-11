@@ -1,6 +1,6 @@
 export class APIService {
     static Calculate(data) {
-        return fetch('http://111.229.185.54:5000/calculation', {
+        return fetch('http://127.0.0.1:5000/calculation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
