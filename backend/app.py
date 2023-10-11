@@ -8,14 +8,15 @@ from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 import json
 
+
 app = Flask(__name__)
 CORS(app)
 
 ma = Marshmallow(app)
 
 @app.route('/')
-def hello():
-    return jsonify({"Hello": "World"})
+def main():
+    return render_template("index.html")
 
 @app.route('/get', methods = ['GET'])
 def get_graph():
