@@ -11,8 +11,8 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route('/')
-def main():
-    return render_template("index.html")
+def hello():
+    return jsonify({"Hello": "World"})
 
 @app.route("/calculation", methods=["POST"])
 def calculation():
