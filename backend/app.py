@@ -12,7 +12,7 @@ CORS(app)
 
 @app.route('/')
 def hello():
-    return jsonify({"Hello": "World"})
+    return render_template("index.html")
 
 @app.route("/calculation", methods=["POST"])
 def calculation():
