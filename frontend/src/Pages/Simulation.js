@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from 'react'
-import { MediumForm, MolecularForm, LightForm } from './Forms'
-import APIService from './APIService';
-import { ResultTable } from './Table';
-import { ResultGraph } from './Graph';
+import { MediumForm, MolecularForm, LightForm } from '../Components/Forms'
+import APIService from '../Components/APIService';
+import { ResultTable } from '../Components/Table';
+import { ResultGraph } from '../Components/Graph';
 
 
 function Simulation() {

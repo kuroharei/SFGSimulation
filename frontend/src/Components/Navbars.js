@@ -1,7 +1,7 @@
 import React from "react";
 
 const Navbars = ({
-
+    setPage
 }) => {
 
     return (
@@ -23,13 +23,8 @@ const Navbars = ({
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                    <a className="nav-link" href="#">
-                    Home <span className="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">
-                    Link
+                    <a className="nav-link" href="#" onClick={() => setPage("Homepage")}>
+                    Homepage <span className="sr-only">(current)</span>
                     </a>
                 </li>
                 <li className="nav-item dropdown">
@@ -42,26 +37,59 @@ const Navbars = ({
                     aria-haspopup="true"
                     aria-expanded="false"
                     >
-                    Dropdown
+                    People
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a className="dropdown-item" href="#">
-                        Action
+                        Principle Investigator
                     </a>
                     <a className="dropdown-item" href="#">
-                        Another action
+                        Group Members
                     </a>
-                    <div className="dropdown-divider" />
+                    <a className="dropdown-item" href="#">
+                        Alumni
+                    </a>
+                    {/* <div className="dropdown-divider" />
                     <a className="dropdown-item" href="#">
                         Something else here
-                    </a>
+                    </a> */}
                     </div>
                 </li>
                 <li className="nav-item">
+                    <a className="nav-link" href="#">
+                    Research
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                    Album
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                    Publications
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                    News
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#" onClick={() => setPage("Simulation")}>
+                    Simulation
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                    Contact
+                    </a>
+                </li>
+                {/* <li className="nav-item">
                     <a className="nav-link disabled" href="#">
                     Disabled
                     </a>
-                </li>
+                </li> */}
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
                 <input
