@@ -142,7 +142,7 @@ function Simulation() {
             <div className='row mb-3 justify-content-center'>
                 <ResultTable param={param}/>
             </div>
-            <div className='row mb-3 justify-content-center'>
+            <div className='row justify-content-center'>
                 <ResultGraph graph={graph}/>
             </div>
         </div>

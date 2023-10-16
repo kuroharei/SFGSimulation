@@ -341,7 +341,7 @@ class SHG:
 
 class Cinfv(SFG):
     def __init__(self, type, lamda, beta, n1, n2, r, theta_distribution=['delta'], psi_distribution=['uniform']) -> None:
-        super.__init__(self, lamda, beta, n1, n2, theta_distribution, psi_distribution)
+        super(Cinfv, self).__init__(lamda, beta, n1, n2, theta_distribution, psi_distribution)
         self.r = r
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
@@ -389,7 +389,7 @@ class Cinfv(SFG):
 
 class C2v(SFG):
     def __init__(self, type, lamda, beta, n1, n2, r, tau, theta_distribution=['delta'], psi_distribution=['uniform']) -> None:
-        super.__init__(self, lamda, beta, n1, n2, theta_distribution, psi_distribution)
+        super(C2v, self).__init__(lamda, beta, n1, n2, theta_distribution, psi_distribution)
         self.r = r
         self.tau = tau
         self.Ra = (1 + self.r - (1 - self.r) * np.cos(self.tau)) / \
@@ -445,7 +445,7 @@ class C2v(SFG):
 
 class C3v(SFG):
     def __init__(self, type, lamda, beta, n1, n2, R=0, theta_distribution=['delta'], psi_distribution=['uniform']) -> None:
-        super.__init__(self, lamda, beta, n1, n2, theta_distribution, psi_distribution)
+        super(C3v, self).__init__(lamda, beta, n1, n2, theta_distribution, psi_distribution)
         self.R = R
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
