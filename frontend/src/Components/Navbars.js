@@ -6,7 +6,7 @@ const Navbars = ({
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="#" onClick={() => setPage("Homepage")}>
                 Navbar
             </a>
             <button
@@ -40,13 +40,13 @@ const Navbars = ({
                     People
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#" onClick={() => setPage("PI")}>
                         Principle Investigator
                     </a>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#" onClick={() => setPage("GroupMembers")}>
                         Group Members
                     </a>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#" onClick={() => setPage("Alumni") }>
                         Alumni
                     </a>
                     {/* <div className="dropdown-divider" />
@@ -56,22 +56,22 @@ const Navbars = ({
                     </div>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <a className="nav-link" href="#" onClick={() => setPage("Research")}>
                     Research
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <a className="nav-link" href="#" onClick={() => setPage("Album")}>
                     Album
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <a className="nav-link" href="#" onClick={() => setPage("Publications")}>
                     Publications
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <a className="nav-link" href="#" onClick={() => setPage("News")}>
                     News
                     </a>
                 </li>
@@ -81,7 +81,7 @@ const Navbars = ({
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <a className="nav-link" href="#" onClick={() => setPage("Contact")}>
                     Contact
                     </a>
                 </li>

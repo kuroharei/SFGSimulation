@@ -65,8 +65,8 @@ function Simulation() {
     // }, [])
 
     return (
-        <div className='container-md'>
-            <h1 className='text-center text-white'>Title</h1>
+        <div className='container'>
+            <h1 className='text-center text-white mb-5 mt-5'>Simulation</h1>
             <div className='row mb-3 justify-content-center'>
                 <div className='col'>
                     <div className='card'>
@@ -74,7 +74,7 @@ function Simulation() {
                             introduction
                         </div>
                         <div className='card-body'>
-                            texttext
+                            This page is
                         </div>
                     </div>
                 </div>
