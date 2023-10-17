@@ -5,7 +5,7 @@ function Homepage({setPage}) {
   return (
     <div className="container-md" style={{minWidth: `50vw`}}>
         <h1 className='text-center text-white shadow-lg mt-3 mb-3' style={{fontSize: `calc(1em + 1.5vw)`}}>Hongfei Wang's Group</h1>
-        <div className='row justify-content-center' style={{minHeight: `80vh`}}>
+        <div className='row justify-content-center' style={{minHeight: `75vh`}}>
           <div className='card'>
               <div className='card-header'>
                 <h3 className='display-5 text-monospace font-weight-bolder' style={{fontSize: `calc(1em + (1vw + 2.5vh) / 2)`}}>Ultrafast Laser Spectroscopy and Surface/Interface Physical Chemistry Laboratory</h3>
