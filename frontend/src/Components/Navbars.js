@@ -7,7 +7,7 @@ const Navbars = ({
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="#" onClick={() => setPage("Homepage")}>
-                Navbar
+                HFW GROUP
             </a>
             <button
                 className="navbar-toggler"
