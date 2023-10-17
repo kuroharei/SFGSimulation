@@ -7,15 +7,15 @@ function Homepage({setPage}) {
         {/* <div className='row'>
           <img src={LAB_1} className='img-fluid' alt='...' />
         </div> */}
-        <h1 className='text-center text-white mt-3 mb-3'>Hongfei Wang's Group</h1>
+        <h1 className='text-center text-white shadow-lg mt-3 mb-3' style={{fontSize: `calc(1.5em + 1vw)`}}>Hongfei Wang's Group</h1>
         <div className='row justify-content-center'>
           <div className='card'>
               <div className='card-header'>
-                <h3 className='display-5'>Ultrafast Laser Spectroscopy and Surface/Interface Physical Chemistry Laboratory</h3>
-                <p className='display-5'>School of Science, Westlake University</p>
+                <h3 className='display-5 text-monospace' style={{fontSize: `calc(1em + 1vw)`}}>Ultrafast Laser Spectroscopy and Surface/Interface Physical Chemistry Laboratory</h3>
+                <p className='display-5 text-monospace' style={{fontSize: `calc(0.5em + 1vw)`}}>School of Science, Westlake University</p>
               </div>
               <div className='card-body'>
-                <p className='text-justify text-lg-left'>
+                <p className='text-justify text-lg-left text-monospace' style={{fontSize: `calc(0.5em + 1vw)`}}>
                   Our research group intends to carry out long-term research on modern physical chemistry and chemical physics related to surface/interface and condensed phase ultrafast and nonlinear spectra and dynamics, including:<br/>
                   <ol className='mt-3'>
                     <li className='mb-3'>Physical chemistry of surfaces and interfaces; structure, interaction and chemical dynamics</li>
