@@ -80,8 +80,7 @@ function Simulation() {
                     </div>
                 </div>
             </div>
-            <div className='row mb-3 justify-content-md-center'>
-                <div className='card-deck'>
+            <div className='row row-cols-1 row-cols-md-3 g-4 mb-3 justify-content-md-center'>
                     <div className='col-md card'>
                         <div className='text-center card-header text-dark'>Molecular parameters</div>
                         <div className='card-body'>
@@ -135,7 +134,6 @@ function Simulation() {
                             />
                         </div>
                     </div>
-                </div>
             </div>
             <div className='row mb-3 justify-content-center'>
                 <button className='btn btn-outline-light btn-lg' type='submit' onClick={calculate}>Calculate</button>

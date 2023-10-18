@@ -1,108 +1,118 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+// const handleScroll = (e) => {
+//     document.getElementById('nav').toggleAttribute('scrolled', current.scrollTop() > document.getElementById('nav').height());
+// }
 
 const Navbars = ({
     setPage
 }) => {
-
+    const [scrolled, setScrolled] = useState(false);
+    useEffect(() => {
+        const handleScroll = (e) => {
+            const $nav = document.getElementById('top-nav');
+            setScrolled(window.scrollY > $nav.clientHeight)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+    const navbarClass = scrolled ? "navbar navbar-expand-lg bg-body-tertiary fixed-top" : "navbar navbar-expand-lg bg-transparent fixed-top"
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark navbar-custom bg-transparent fixed-top">
+        <nav className={navbarClass} id="top-nav">
+        <div className="container-fluid">
             <a className="navbar-brand" href="#" onClick={() => setPage("Homepage")}>
                 HFW GROUP
             </a>
             <button
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
             >
-                <span className="navbar-toggler-icon" />
+            <span className="navbar-toggler-icon" />
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
-                    <a className="nav-link" href="#" onClick={() => setPage("Homepage")}>
-                    Homepage <span className="sr-only">(current)</span>
-                    </a>
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#" onClick={() => setPage("Homepage")}>
+                    Homepage
+                </a>
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => setPage("Research")}>
+                    Research
+                </a>
                 </li>
                 <li className="nav-item dropdown">
-                    <a
+                <a
                     className="nav-link dropdown-toggle"
                     href="#"
-                    id="navbarDropdown"
                     role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
+                    data-bs-toggle="dropdown"
                     aria-expanded="false"
-                    >
+                >
                     People
-                    </a>
-                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a className="dropdown-item" href="#" onClick={() => setPage("PI")}>
+                </a>
+                <ul className="dropdown-menu">
+                    <li>
+                    <a className="dropdown-item" href="#"  onClick={() => setPage("PI")}>
                         Principle Investigator
                     </a>
+                    </li>
+                    <li>
                     <a className="dropdown-item" href="#" onClick={() => setPage("GroupMembers")}>
                         Group Members
                     </a>
+                    </li>
+                    <li>
                     <a className="dropdown-item" href="#" onClick={() => setPage("Alumni") }>
                         Alumni
                     </a>
-                    {/* <div className="dropdown-divider" />
-                    <a className="dropdown-item" href="#">
-                        Something else here
-                    </a> */}
-                    </div>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={() => setPage("Research")}>
-                    Research
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={() => setPage("Album")}>
-                    Album
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={() => setPage("Publications")}>
-                    Publications
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={() => setPage("News")}>
-                    News
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={() => setPage("Simulation")}>
-                    Simulation
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={() => setPage("Contact")}>
-                    Contact
-                    </a>
-                </li>
-                {/* <li className="nav-item">
-                    <a className="nav-link disabled" href="#">
-                    Disabled
-                    </a>
-                </li> */}
+                    </li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => setPage("Album")}>
+                    Album
+                </a>
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => setPage("Publications")}>
+                    Publications
+                </a>
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => setPage("News")}>
+                    News
+                </a>
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => setPage("Simulation")}>
+                    Simulation
+                </a>
+                </li>
+                <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => setPage("Contact")}>
+                    Contact
+                </a>
+                </li>
+            </ul>
+            <form className="d-flex" role="search">
                 <input
-                    className="form-control mr-sm-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
                 />
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+                <button className="btn btn-outline-success" type="submit">
                     Search
                 </button>
-                </form>
+            </form>
             </div>
+        </div>
         </nav>
     )
 }

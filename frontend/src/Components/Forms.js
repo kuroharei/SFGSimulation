@@ -60,22 +60,11 @@ export function MolecularForm({
         <small id="symmetryHelp" className="form-text text-muted">
           (Symmetry of molecule)
         </small>
-        {/* <select
-          name="symmetry"
-          className="form-control"
-          id="symmetry-controller"
-          value={symmetry}
-          onChange={e => setSymmetry(e.target.value)}
-        >
-          <option id="C3v" value="C3v" data-content="C<sub>3v</sub>" />
-          <option id="C2v" value="C2v" data-content="C<sub>2v</sub>" />
-          <option id="Cinfv" value="Cinfv" data-content="C<sub>∞v</sub>" />
-        </select> */}
         <div className='dropdown'
           name='symmetry'
           id='symmetry-controller'
         >
-          <button className="btn btn-secondary dropdown-toggle bg-white text-dark" id='symmetry-value' type="button" data-toggle="dropdown" aria-expanded="false">
+          <button className="btn btn-secondary dropdown-toggle bg-white text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <SelectSymmetry symmetry={symmetry} />
           </button>
           <div className='dropdown-menu'>
