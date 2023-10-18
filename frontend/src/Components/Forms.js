@@ -1,4 +1,27 @@
+import React from 'react'
 import { ConfigurationCanvas } from './Canvas'
+
+const SelectSymmetry = ({symmetry}) => {
+  if (symmetry === "C3v"){
+    return (
+      <React.StrictMode>
+        C<sub>3v</sub>
+      </React.StrictMode>
+    )
+  } else if (symmetry === "C2v"){
+    return (
+      <React.StrictMode>
+        C<sub>2v</sub>
+      </React.StrictMode>
+    )
+  } else if (symmetry === "Cinfv"){
+    return (
+      <React.StrictMode>
+        C<sub>&infin;v</sub>
+      </React.StrictMode>
+    )
+  }
+}
 
 export function MolecularForm({
   symmetry,
@@ -37,9 +60,9 @@ export function MolecularForm({
         <small id="symmetryHelp" className="form-text text-muted">
           (Symmetry of molecule)
         </small>
-        <select
+        {/* <select
           name="symmetry"
-          className="form-control selectpicker"
+          className="form-control"
           id="symmetry-controller"
           value={symmetry}
           onChange={e => setSymmetry(e.target.value)}
@@ -47,7 +70,21 @@ export function MolecularForm({
           <option id="C3v" value="C3v" data-content="C<sub>3v</sub>" />
           <option id="C2v" value="C2v" data-content="C<sub>2v</sub>" />
           <option id="Cinfv" value="Cinfv" data-content="C<sub>∞v</sub>" />
-        </select>
+        </select> */}
+        <div className='dropdown'
+          name='symmetry'
+          id='symmetry-controller'
+        >
+          <button className="btn btn-secondary dropdown-toggle bg-white text-dark" id='symmetry-value' type="button" data-toggle="dropdown" aria-expanded="false">
+            <SelectSymmetry symmetry={symmetry} />
+          </button>
+          <div className='dropdown-menu'>
+            <div className='dropdown-item' id="C3v" value="C3v" onClick={e => setSymmetry("C3v")}>C<sub>3v</sub></div>
+            <div className='dropdown-item' id="C2v" value="C2v" onClick={e => setSymmetry("C2v")}>C<sub>2v</sub></div>
+            <div className='dropdown-item' id="Cinfv" value="Cinfv" onClick={e => setSymmetry("Cinfv")}>C<sub>&infin;v</sub></div>
+          </div>
+        </div>
+
       </div>
       <SymmetryForm
         symmetry={symmetry}

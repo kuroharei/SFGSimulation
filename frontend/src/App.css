@@ -1,18 +1,18 @@
 .App {
-  /* background-color: #282c34; */
+  background-color: #73e9ef;
   min-height: 100vh;
   /* color: rgb(0, 0, 0); */
   display: block;
   justify-content: center;
   align-items: center;
  
-  background: url(images/LAB-1.jpg) center 0px;
+  /* background: url(assets/images/LAB-1.jpg) center 0px;
   background-size: cover;
-  background-position: center -300px; 
+  background-position: center -300px;  */
   /* background-repeat: no-repeat; */
-  background-attachment: fixed; 
+  /* background-attachment: fixed; 
    -webkit-background-size: cover;  
    -o-background-size: cover;  
    -moz-background-size: cover;  
-   -ms-background-size: cover;
+   -ms-background-size: cover; */
 }

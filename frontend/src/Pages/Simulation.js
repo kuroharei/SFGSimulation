@@ -5,6 +5,7 @@ import { ResultTable } from '../Components/Table';
 import { ResultGraph } from '../Components/Graph';
 
 
+
 function Simulation() {
 
     const [symmetry, setSymmetry] = useState('C3v');

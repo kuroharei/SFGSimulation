@@ -1,5 +1,5 @@
 import React from 'react'
-import LAB_1 from '../images/LAB-1.jpg'
+import LAB_1 from '../assets/images/LAB-1.jpg'
 
 
 
