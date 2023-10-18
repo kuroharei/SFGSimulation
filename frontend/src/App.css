@@ -8,12 +8,11 @@
  
   background: url(images/LAB-1.jpg) center 0px;
   background-size: cover;
-  background-position: center -400px; 
+  background-position: center -300px; 
   /* background-repeat: no-repeat; */
   background-attachment: fixed; 
    -webkit-background-size: cover;  
    -o-background-size: cover;  
    -moz-background-size: cover;  
    -ms-background-size: cover;
-
 }

@@ -5,7 +5,7 @@ const Navbars = ({
 }) => {
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark navbar-custom bg-transparent fixed-top">
             <a className="navbar-brand" href="#" onClick={() => setPage("Homepage")}>
                 HFW GROUP
             </a>
