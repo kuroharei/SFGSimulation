@@ -47,7 +47,12 @@ const Navbars = ({
                     Research
                 </a>
                 </li>
-                <li className="nav-item dropdown">
+                <li className="nav-item">
+                <a className="nav-link" href="#" onClick={() => setPage("People")}>
+                    People
+                </a>
+                </li>
+                {/* <li className="nav-item dropdown">
                 <a
                     className="nav-link dropdown-toggle"
                     href="#"
@@ -74,10 +79,10 @@ const Navbars = ({
                     </a>
                     </li>
                 </ul>
-                </li>
+                </li> */}
                 <li className="nav-item">
-                <a className="nav-link" href="#" onClick={() => setPage("Album")}>
-                    Album
+                <a className="nav-link" href="#" onClick={() => setPage("Events")}>
+                    Events
                 </a>
                 </li>
                 <li className="nav-item">
@@ -86,18 +91,13 @@ const Navbars = ({
                 </a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link" href="#" onClick={() => setPage("News")}>
-                    News
-                </a>
-                </li>
-                <li className="nav-item">
                 <a className="nav-link" href="#" onClick={() => setPage("Simulation")}>
-                    Simulation
+                    Resources
                 </a>
                 </li>
                 <li className="nav-item">
                 <a className="nav-link" href="#" onClick={() => setPage("Contact")}>
-                    Contact
+                    Contact Us
                 </a>
                 </li>
             </ul>

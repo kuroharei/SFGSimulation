@@ -64,10 +64,10 @@ export function MolecularForm({
           name='symmetry'
           id='symmetry-controller'
         >
-          <button className="btn btn-secondary dropdown-toggle bg-white text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button className="btn btn-secondary dropdown-toggle bg-white text-dark w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <SelectSymmetry symmetry={symmetry} />
           </button>
-          <div className='dropdown-menu'>
+          <div className='dropdown-menu w-100 text-center'>
             <div className='dropdown-item' id="C3v" value="C3v" onClick={e => setSymmetry("C3v")}>C<sub>3v</sub></div>
             <div className='dropdown-item' id="C2v" value="C2v" onClick={e => setSymmetry("C2v")}>C<sub>2v</sub></div>
             <div className='dropdown-item' id="Cinfv" value="Cinfv" onClick={e => setSymmetry("Cinfv")}>C<sub>&infin;v</sub></div>
@@ -280,7 +280,7 @@ export function LightForm({
           type="range"
           name="betavis"
           id="betavis"
-          className="custom-range"
+          className="form-range"
           min={0}
           max={90}
           step="0.1"
@@ -306,7 +306,7 @@ export function LightForm({
           type="range"
           name="betair"
           id="betair"
-          className="custom-range"
+          className="form-range"
           min={0}
           max={90}
           step="0.1"
