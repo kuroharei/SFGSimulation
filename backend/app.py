@@ -4,14 +4,12 @@ from model import *
 import base64
 from io import BytesIO
 from matplotlib.figure import Figure
-from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 import json
 
 app = Flask(__name__)
 CORS(app)
 
-ma = Marshmallow(app)
 
 @app.route('/')
 def hello():
@@ -37,7 +35,7 @@ def calculation():
 
     if symmetry == "C3v":
         R = float(request.json['R'])
-        sample = C3v(lamda=lamda, beta=beta, n1=n1, n2=n2, R=R, theta_distribution=[theta_distribution])
+        sample = C3v(type="SFG", lamda=lamda, beta=beta, n1=n1, n2=n2, R=R, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
         chi = sample.chi(np.array([w]), np.array([0]), np.array([np.pi]), np.array([2000]), np.array([1]), np.array([np.pi * theta / 180]))
@@ -95,7 +93,7 @@ def calculation():
     if symmetry == "C2v":
         r = float(request.json['rC2v'])
         tau = float(request.json['tau']) / 180 * np.pi
-        sample = C2v(lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, tau=tau, theta_distribution=[theta_distribution])
+        sample = C2v(type="SFG", lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, tau=tau, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
         chi = sample.chi(np.array([w]), np.array([0]), np.array([np.pi]), np.array([2000]), np.array([1]), np.array([np.pi * theta / 180]))
@@ -152,7 +150,7 @@ def calculation():
     
     if symmetry == "Cinfv":
         r = float(request.json['rCinfv'])
-        sample = Cinfv(lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, theta_distribution=[theta_distribution])
+        sample = Cinfv(type="SFG", lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
         chi = sample.chi(np.array([w]), np.array([0]), np.array([np.pi]), np.array([2000]), np.array([1]), np.array([np.pi * theta / 180]))
@@ -189,4 +187,5 @@ def calculation():
 
 
 if __name__ == "__main__":
+    # app.run(host="0.0.0.0", port=5000)
     app.run(debug=True)

@@ -191,6 +191,7 @@ export const ConfigurationCanvas = ({
       height={height}
       style={configurationCanvasStyle}
       ref={setCanvasRef}
+      className='img-fluid'
     />
   )
 }
