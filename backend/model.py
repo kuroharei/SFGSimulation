@@ -94,116 +94,112 @@ class SFG:
     #     pass
 
     def sspssParam(self, squarecospsi, squaresinpsi):
-        self.sspssd = self.Lyy(0) * self.Lyy(1) * self.Lzz(2) * np.sin(
-            self.beta[2]) * self.yyzssParam(squarecospsi, squaresinpsi)[0]
-        self.sspssc = self.yyzssParam(squarecospsi, squaresinpsi)[1]
+        a = self.Lyy(0) * self.Lyy(1) * self.Lzz(2) * np.sin(self.beta[2]) * self.yyzssParam(squarecospsi, squaresinpsi)[0]
+        b = self.Lyy(0) * self.Lyy(1) * self.Lzz(2) * np.sin(self.beta[2]) * self.yyzssParam(squarecospsi, squaresinpsi)[1]
+        self.sspssd = a
+        self.sspssc = - b if a == 0 else - b / a
         return np.array([self.sspssd, self.sspssc])
 
     def spsssParam(self, squarecospsi, squaresinpsi):
-        self.spsssd = self.Lyy(0) * self.Lzz(1) * self.Lyy(2) * np.sin(
-            self.beta[1]) * self.yzyssParam(squarecospsi, squaresinpsi)[0]
-        self.spsssc = self.yzyssParam(squarecospsi, squaresinpsi)[1]
+        a = self.Lyy(0) * self.Lzz(1) * self.Lyy(2) * np.sin(self.beta[1]) * self.yzyssParam(squarecospsi, squaresinpsi)[0]
+        b = self.Lyy(0) * self.Lzz(1) * self.Lyy(2) * np.sin(self.beta[1]) * self.yzyssParam(squarecospsi, squaresinpsi)[1]
+        self.spsssd = a
+        self.spsssc = - b if a == 0 else - b / a
         return np.array([self.spsssd, self.spsssc])
 
     def pssssParam(self, squarecospsi, squaresinpsi):
-        self.pssssd = self.Lzz(0) * self.Lyy(1) * self.Lyy(2) * np.sin(
-            self.beta[0]) * self.zyyssParam(squarecospsi, squaresinpsi)[0]
-        self.pssssc = self.zyyssParam(squarecospsi, squaresinpsi)[1]
+        a = self.Lzz(0) * self.Lyy(1) * self.Lyy(2) * np.sin(self.beta[0]) * self.zyyssParam(squarecospsi, squaresinpsi)[0]
+        b = self.Lzz(0) * self.Lyy(1) * self.Lyy(2) * np.sin(self.beta[0]) * self.zyyssParam(squarecospsi, squaresinpsi)[1]
+        self.pssssd = a
+        self.pssssc = - b if a == 0 else - b / a
         return np.array([self.pssssd, self.pssssc])
 
     def pppssParam(self, squarecospsi, squaresinpsi):
-        a = np.array([-self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]) * np.sin(self.beta[2]),
-                      -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) *
-                      np.cos(self.beta[0]) * np.sin(self.beta[1]
-                                                    ) * np.cos(self.beta[2]),
-                      +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) *
-                      np.sin(self.beta[0]) * np.cos(self.beta[1]
-                                                    ) * np.cos(self.beta[2]),
-                      +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1]) * np.sin(self.beta[2])])
-        d, c = np.array([self.xxzssParam(squarecospsi, squaresinpsi),
-                         self.xzxssParam(squarecospsi, squaresinpsi),
-                         self.zxxssParam(squarecospsi, squaresinpsi),
-                         self.zzzssParam(squarecospsi, squaresinpsi)]).T
-        self.pppssd = sum(a * d)
-        self.pppssc = sum(a * d * c) / sum(a * d)
+        a = -self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]) * np.sin(self.beta[2]) * self.xxzssParam(squarecospsi, squaresinpsi)[0] \
+            -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) * np.cos(self.beta[0]) * np.sin(self.beta[1]) * np.cos(self.beta[2]) * self.xzxssParam(squarecospsi, squaresinpsi)[0] \
+            +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) * np.sin(self.beta[0]) * np.cos(self.beta[1]) * np.cos(self.beta[2]) * self.zxxssParam(squarecospsi, squaresinpsi)[0] \
+            +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1]) * np.sin(self.beta[2]) * self.zzzssParam(squarecospsi, squaresinpsi)[0]
+        
+        b = -self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]) * np.sin(self.beta[2]) * self.xxzssParam(squarecospsi, squaresinpsi)[1] \
+            -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) * np.cos(self.beta[0]) * np.sin(self.beta[1]) * np.cos(self.beta[2]) * self.xzxssParam(squarecospsi, squaresinpsi)[1] \
+            +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) * np.sin(self.beta[0]) * np.cos(self.beta[1]) * np.cos(self.beta[2]) * self.zxxssParam(squarecospsi, squaresinpsi)[1] \
+            +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1]) * np.sin(self.beta[2]) * self.zzzssParam(squarecospsi, squaresinpsi)[1]
+        self.pppssd = a
+        self.pppssc = - b if a == 0 else - b / a
         return np.array([self.pppssd, self.pppssc])
 
     def sspasParam(self, squarecospsi, squaresinpsi):
-        self.sspasd = self.Lyy(0) * self.Lyy(1) * self.Lzz(2) * np.sin(
-            self.beta[2]) * self.yyzasParam(squarecospsi, squaresinpsi)[0]
-        self.sspasc = self.yyzasParam(squarecospsi, squaresinpsi)[1]
+        a = self.Lyy(0) * self.Lyy(1) * self.Lzz(2) * np.sin(self.beta[2]) * self.yyzasParam(squarecospsi, squaresinpsi)[0]
+        b = self.Lyy(0) * self.Lyy(1) * self.Lzz(2) * np.sin(self.beta[2]) * self.yyzasParam(squarecospsi, squaresinpsi)[1]
+        self.sspasd = a
+        self.sspasc = - b if a == 0 else - b / a
         return np.array([self.sspasd, self.sspasc])
 
     def spsasParam(self, squarecospsi, squaresinpsi):
-        self.spsasd = self.Lyy(0) * self.Lzz(1) * self.Lyy(2) * np.sin(
-            self.beta[1]) * self.yzyasParam(squarecospsi, squaresinpsi)[0]
-        self.spsasc = self.yzyasParam(squarecospsi, squaresinpsi)[1]
+        a = self.Lyy(0) * self.Lzz(1) * self.Lyy(2) * np.sin(self.beta[1]) * self.yzyasParam(squarecospsi, squaresinpsi)[0]
+        b = self.Lyy(0) * self.Lzz(1) * self.Lyy(2) * np.sin(self.beta[1]) * self.yzyasParam(squarecospsi, squaresinpsi)[1]
+        self.spsasd = a
+        self.spsasc = - b if a == 0 else - b / a
         return np.array([self.spsasd, self.spsasc])
 
     def pssasParam(self, squarecospsi, squaresinpsi):
-        self.pssasd = self.Lzz(0) * self.Lyy(1) * self.Lyy(2) * np.sin(
-            self.beta[0]) * self.zyyasParam(squarecospsi, squaresinpsi)[0]
-        self.pssasc = self.zyyasParam(squarecospsi, squaresinpsi)[1]
+        a = self.Lzz(0) * self.Lyy(1) * self.Lyy(2) * np.sin(self.beta[0]) * self.zyyasParam(squarecospsi, squaresinpsi)[0]
+        b = self.Lzz(0) * self.Lyy(1) * self.Lyy(2) * np.sin(self.beta[0]) * self.zyyasParam(squarecospsi, squaresinpsi)[1]
+        self.pssasd = a
+        self.pssasc = - b if a == 0 else - b / a
         return np.array([self.pssasd, self.pssasc])
 
     def pppasParam(self, squarecospsi, squaresinpsi):
-        a = np.array([-self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]) * np.sin(self.beta[2]),
-                      -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) *
-                      np.cos(self.beta[0]) * np.sin(self.beta[1]
-                                                    ) * np.cos(self.beta[2]),
-                      +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) *
-                      np.sin(self.beta[0]) * np.cos(self.beta[1]
-                                                    ) * np.cos(self.beta[2]),
-                      +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1]) * np.sin(self.beta[2])])
-        d, c = np.array([self.xxzasParam(squarecospsi, squaresinpsi),
-                         self.xzxasParam(squarecospsi, squaresinpsi),
-                         self.zxxasParam(squarecospsi, squaresinpsi),
-                         self.zzzasParam(squarecospsi, squaresinpsi)]).T
-        self.pppasd = sum(a * d)
-        self.pppasc = sum(a * d * c) / sum(a * d)
+        a = -self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]) * np.sin(self.beta[2]) * self.xxzasParam(squarecospsi, squaresinpsi)[0] \
+            -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) * np.cos(self.beta[0]) * np.sin(self.beta[1]) * np.cos(self.beta[2]) * self.xzxasParam(squarecospsi, squaresinpsi)[0] \
+            +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) * np.sin(self.beta[0]) * np.cos(self.beta[1]) * np.cos(self.beta[2]) * self.zxxasParam(squarecospsi, squaresinpsi)[0] \
+            +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1]) * np.sin(self.beta[2]) * self.zzzasParam(squarecospsi, squaresinpsi)[0]
+        
+        b = -self.Lxx(0) * self.Lxx(1) * self.Lzz(2) * np.cos(self.beta[0]) * np.cos(self.beta[1]) * np.sin(self.beta[2]) * self.xxzasParam(squarecospsi, squaresinpsi)[1] \
+            -self.Lxx(0) * self.Lzz(1) * self.Lxx(2) * np.cos(self.beta[0]) * np.sin(self.beta[1]) * np.cos(self.beta[2]) * self.xzxasParam(squarecospsi, squaresinpsi)[1] \
+            +self.Lzz(0) * self.Lxx(1) * self.Lxx(2) * np.sin(self.beta[0]) * np.cos(self.beta[1]) * np.cos(self.beta[2]) * self.zxxasParam(squarecospsi, squaresinpsi)[1] \
+            +self.Lzz(0) * self.Lzz(1) * self.Lzz(2) * np.sin(self.beta[0]) * np.sin(self.beta[1]) * np.sin(self.beta[2]) * self.zzzasParam(squarecospsi, squaresinpsi)[1]
+        self.pppasd = a
+        self.pppasc = - b if a == 0 else - b / a
         return np.array([self.pppasd, self.pppasc])
 
     def sspss(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.sspssParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def spsss(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.spsssParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def pssss(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.pssssParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def pppss(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.pppssParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def sspas(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.sspasParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def spsas(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.spsasParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def pssas(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.pssasParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def pppas(self, costheta, cubecostheta, squarecospsi, squaresinpsi):
         d, c = self.pppasParam(squarecospsi, squaresinpsi)
-        return d * (costheta - c * cubecostheta)
+        return d * (costheta - c * cubecostheta) if d != 0 else - c * cubecostheta
 
     def chi(self, theta_w=[0], theta_lower=[0], theta_upper=[np.pi], theta_n=[2000], theta_a=[1], theta=[0], psi_w=[np.pi * 2], psi_lower=[0], psi_upper=[np.pi * 2], psi_n=[4000], psi_a=[1], psi=[0]):
-        costheta = Expection((lambda x: np.cos(x)), self.theta_distribution,
-                             theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
-        cubecostheta = Expection((lambda x: np.cos(x) ** 3), self.theta_distribution,
-                                 theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
-        squarecospsi = Expection((lambda x: np.cos(
-            x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
-        squaresinpsi = Expection((lambda x: np.sin(
-            x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
+        costheta = Expection((lambda x: np.cos(x)), self.theta_distribution, theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
+        cubecostheta = Expection((lambda x: np.cos(x) ** 3), self.theta_distribution, theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
+        squarecospsi = Expection((lambda x: np.cos(x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
+        squaresinpsi = Expection((lambda x: np.sin(x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
         return {"sspss": self.sspss(costheta, cubecostheta, squarecospsi, squaresinpsi),
                 "spsss": self.spsss(costheta, cubecostheta, squarecospsi, squaresinpsi),
                 "pssss": self.pssss(costheta, cubecostheta, squarecospsi, squaresinpsi),
@@ -320,14 +316,10 @@ class SHG:
         return d * (costheta - c * cubecostheta)
 
     def SHGchi(self, theta_w=[0], theta_lower=[0], theta_upper=[np.pi], theta_n=[2000], theta_a=[1], theta=[0], psi_w=[np.pi * 2], psi_lower=[0], psi_upper=[np.pi * 2], psi_n=[4000], psi_a=[1], psi=[0]):
-        costheta = Expection((lambda x: np.cos(x)), self.theta_distribution,
-                             theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
-        cubecostheta = Expection((lambda x: np.cos(x) ** 3), self.theta_distribution,
-                                 theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
-        squarecospsi = Expection((lambda x: np.cos(
-            x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
-        squaresinpsi = Expection((lambda x: np.sin(
-            x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
+        costheta = Expection((lambda x: np.cos(x)), self.theta_distribution, theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
+        cubecostheta = Expection((lambda x: np.cos(x) ** 3), self.theta_distribution, theta_w, theta_lower, theta_upper, theta_n, theta_a, theta)
+        squarecospsi = Expection((lambda x: np.cos(x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
+        squaresinpsi = Expection((lambda x: np.sin(x) ** 2), self.psi_distribution, psi_w, psi_lower, psi_upper, psi_n, psi_a, psi)
         return {"spss": self.spss(costheta, cubecostheta, squarecospsi, squaresinpsi),
                 "msss": self.msss(costheta, cubecostheta, squarecospsi, squaresinpsi),
                 "ppss": self.ppss(costheta, cubecostheta, squarecospsi, squaresinpsi),
@@ -345,13 +337,13 @@ class Cinfv(SFG):
         self.r = r
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 + self.r) / 2, (1 - self.r) / 2])
+        return np.array([(1 + self.r) / 2, - (1 - self.r) / 2])
 
     def yyzssParam(self, squarecospsi, squaresinpsi):
         return self.xxzssParam(squarecospsi, squaresinpsi)
 
     def xzxssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 - self.r) / 2, (1 - self.r) / 2])
+        return np.array([(1 - self.r) / 2, - (1 - self.r) / 2])
 
     def zxxssParam(self, squarecospsi, squaresinpsi):
         return self.xzxssParam(squarecospsi, squaresinpsi)
@@ -363,7 +355,7 @@ class Cinfv(SFG):
         return self.xzxssParam(squarecospsi, squaresinpsi)
 
     def zzzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([self.r, self.r - 1])
+        return np.array([self.r, 1 - self.r])
 
     def xxzasParam(self, squarecospsi, squaresinpsi):
         return np.array([0, 0])
@@ -398,13 +390,14 @@ class C2v(SFG):
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
         return np.array([(self.Ra * squarecospsi + self.Rb * squaresinpsi + 1) / 2,
-                        -(self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2])
+                         (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2])
 
     def yyzssParam(self, squarecospsi, squaresinpsi):
         return self.xxzssParam(squarecospsi, squaresinpsi)
 
     def xzxssParam(self, squarecospsi, squaresinpsi):
-        return np.array([- (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2, - (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2])
+        return np.array([- (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2,
+                           (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2])
 
     def zxxssParam(self, squarecospsi, squaresinpsi):
         return self.xzxssParam(squarecospsi, squaresinpsi)
@@ -417,16 +410,16 @@ class C2v(SFG):
 
     def zzzssParam(self, squarecospsi, squaresinpsi):
         return np.array([(self.Ra * squaresinpsi + self.Rb * squarecospsi),
-                         (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1)])
+                        -(self.Ra * squaresinpsi + self.Rb * squarecospsi - 1)])
 
     def xxzasParam(self, squarecospsi, squaresinpsi):
-        return np.array([- squaresinpsi, - squaresinpsi])
+        return np.array([- squaresinpsi, squaresinpsi])
 
     def yyzasParam(self, squarecospsi, squaresinpsi):
         return self.xxzasParam(squarecospsi, squaresinpsi)
 
     def xzxasParam(self, squarecospsi, squaresinpsi):
-        return np.array([(squarecospsi - squaresinpsi) / 2, - squaresinpsi])
+        return np.array([(squarecospsi - squaresinpsi) / 2, squaresinpsi])
 
     def zxxasParam(self, squarecospsi, squaresinpsi):
         return self.xzxasParam(squarecospsi, squaresinpsi)
@@ -438,22 +431,22 @@ class C2v(SFG):
         return self.xzxasParam(squarecospsi, squaresinpsi)
 
     def zzzasParam(self, squarecospsi, squaresinpsi):
-        return np.array([2 * squaresinpsi, 2 * squaresinpsi])
+        return np.array([2 * squaresinpsi, -2 * squaresinpsi])
 
 
 class C3v(SFG):
-    def __init__(self, type, lamda, beta, n1, n2, R=0, theta_distribution=['delta'], psi_distribution=['uniform']) -> None:
+    def __init__(self, type, lamda, beta, n1, n2, r, tau, theta_distribution=['delta'], psi_distribution=['uniform']) -> None:
         super(C3v, self).__init__(lamda, beta, n1, n2, theta_distribution, psi_distribution)
-        self.R = R
+        self.R = (1 + r - (1 - r) * (np.cos(tau) ** 2)) / (2 * (r + (1 - r) * (np.cos(tau) ** 2)))
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 + self.R) / 2, (1 - self.R) / 2])
+        return np.array([(1 + self.R) / 2, - (1 - self.R) / 2])
 
     def yyzssParam(self, squarecospsi, squaresinpsi):
         return self.xxzssParam(squarecospsi, squaresinpsi)
 
     def xzxssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 - self.R) / 2, (1 - self.R) / 2])
+        return np.array([(1 - self.R) / 2, - (1 - self.R) / 2])
 
     def zxxssParam(self, squarecospsi, squaresinpsi):
         return self.xzxssParam(squarecospsi, squaresinpsi)
@@ -465,7 +458,7 @@ class C3v(SFG):
         return self.xzxssParam(squarecospsi, squaresinpsi)
 
     def zzzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([self.R, - (1 - self.R)])
+        return np.array([self.R, 1 - self.R])
 
     def xxzasParam(self, squarecospsi, squaresinpsi):
         return np.array([-1.0, 1.0])
@@ -474,16 +467,16 @@ class C3v(SFG):
         return np.array([-1.0, 1.0])
 
     def xzxasParam(self, squarecospsi, squaresinpsi):
-        return np.array([-1e-100, 1e100])
+        return np.array([0.0, 1.0])
 
     def zxxasParam(self, squarecospsi, squaresinpsi):
-        return np.array([-1e-100, 1e100])
+        return np.array([0.0, 1.0])
 
     def yzyasParam(self, squarecospsi, squaresinpsi):
-        return np.array([-1e-100, 1e100])
+        return np.array([0.0, 1.0])
 
     def zyyasParam(self, squarecospsi, squaresinpsi):
-        return np.array([-1e-100, 1e100])
+        return np.array([0.0, 1.0])
 
     def zzzasParam(self, squarecospsi, squaresinpsi):
-        return np.array([2, 1])
+        return np.array([2.0, -2.0])

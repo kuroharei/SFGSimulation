@@ -32,10 +32,12 @@ def calculation():
     beta = list(map(lambda deg : np.pi * float(deg) / 180, [betavis, betair]))
     n1 = [float(request.json['n1sfg']), float(request.json['n1vis']), float(request.json['n1ir'])]
     n2 = [float(request.json['n2sfg']), float(request.json['n2vis']), float(request.json['n2ir'])]
+    r = float(request.json['r'])
+    tau = float(request.json['tau']) / 180 * np.pi
 
     if symmetry == "C3v":
-        R = float(request.json['R'])
-        sample = C3v(type="SFG", lamda=lamda, beta=beta, n1=n1, n2=n2, R=R, theta_distribution=[theta_distribution])
+        # R = float(request.json['R'])
+        sample = C3v(type="SFG", lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, tau=tau, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
         chi = sample.chi(np.array([w]), np.array([0]), np.array([np.pi]), np.array([2000]), np.array([1]), np.array([np.pi * theta / 180]))
@@ -91,8 +93,8 @@ def calculation():
                         "param": param})
 
     if symmetry == "C2v":
-        r = float(request.json['rC2v'])
-        tau = float(request.json['tau']) / 180 * np.pi
+        # r = float(request.json['rC2v'])
+        # tau = float(request.json['tau']) / 180 * np.pi
         sample = C2v(type="SFG", lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, tau=tau, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 
@@ -149,7 +151,7 @@ def calculation():
                         "param": param})
     
     if symmetry == "Cinfv":
-        r = float(request.json['rCinfv'])
+        # r = float(request.json['rCinfv'])
         sample = Cinfv(type="SFG", lamda=lamda, beta=beta, n1=n1, n2=n2, r=r, theta_distribution=[theta_distribution])
         theta = np.linspace(0, 90, 180)
 

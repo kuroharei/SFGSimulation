@@ -10,10 +10,8 @@ function Simulation() {
 
     const [symmetry, setSymmetry] = useState('C3v');
     const [FWHM, setFWHM] = useState(10);
-    const [R, setR] = useState(3.4);
+    const [r, setr] = useState(0.026);
     const [tau, settau] = useState(109.5);
-    const [rC2v, setrC2v] = useState(0.27);
-    const [rCinfv, setrCinfv] = useState(0.27);
     const [n1sfg, setn1sfg] = useState(1);
     const [n1vis, setn1vis] = useState(1);
     const [n1ir, setn1ir] = useState(1);
@@ -31,10 +29,8 @@ function Simulation() {
         APIService.Calculate({
             symmetry,
             FWHM,
-            R,
             tau,
-            rC2v,
-            rCinfv,
+            r,
             n1sfg,
             n1vis,
             n1ir,
@@ -90,14 +86,10 @@ function Simulation() {
                                     FWHM={FWHM}
                                     setSymmetry={setSymmetry}
                                     setFWHM={setFWHM}
-                                    R={R}
+                                    r = {r}
                                     tau={tau}
-                                    rC2v={rC2v}
-                                    rCinfv={rCinfv}
-                                    setR={setR}
+                                    setr = {setr}
                                     settau={settau}
-                                    setrC2v={setrC2v}
-                                    setrCinfv={setrCinfv}
                                 />
                             </div>
                         </div>

@@ -40,9 +40,9 @@ export function ResultTable({param}) {
                             return (
                                 <React.StrictMode>
                                     {Object.keys(param[sym]).map((pol) => {
-                                        if(Math.abs(param[sym][pol]['c']) > 1e9) {
+                                        if(Math.abs(param[sym][pol]['d']) == 0) {
                                             return (
-                                                <td>{(param[sym][pol]['d'] * param[sym][pol]['c']).toFixed(2)}<sup>*</sup></td>
+                                                <td>{(param[sym][pol]['c']).toFixed(2)}<sup>*</sup></td>
                                             )
                                         } else {
                                             return(
@@ -60,7 +60,7 @@ export function ResultTable({param}) {
                             return (
                                 <React.StrictMode>
                                     {Object.keys(param[sym]).map((pol) => {
-                                        if(Math.abs(param[sym][pol]['c']) > 1e9) {
+                                        if(Math.abs(param[sym][pol]['d']) == 0) {
                                             return (
                                                 <td>&infin;</td>
                                             )

@@ -28,15 +28,16 @@ export function MolecularForm({
   FWHM,
   setSymmetry,
   setFWHM,
-  R,
+  r,
   tau,
-  rC2v,
-  rCinfv,
-  setR,
+  setr,
   settau,
-  setrC2v,
-  setrCinfv
 }) {
+  const changeSymmetry = (symmetry, r, tau) => {
+    setSymmetry(symmetry);
+    setr(r);
+    settau(tau);
+  }
   return (
     <form>
       <div className="mb-3">
@@ -68,23 +69,19 @@ export function MolecularForm({
             <SelectSymmetry symmetry={symmetry} />
           </button>
           <div className='dropdown-menu w-100 text-center'>
-            <div className='dropdown-item' id="C3v" value="C3v" onClick={e => setSymmetry("C3v")}>C<sub>3v</sub></div>
-            <div className='dropdown-item' id="C2v" value="C2v" onClick={e => setSymmetry("C2v")}>C<sub>2v</sub></div>
-            <div className='dropdown-item' id="Cinfv" value="Cinfv" onClick={e => setSymmetry("Cinfv")}>C<sub>&infin;v</sub></div>
+            <div className='dropdown-item' id="C3v" value="C3v" onClick={() => changeSymmetry("C3v", 0.026, 109.5)}>C<sub>3v</sub></div>
+            <div className='dropdown-item' id="C2v" value="C2v" onClick={() => changeSymmetry("C2v", 0.27, 109.5)}>C<sub>2v</sub></div>
+            <div className='dropdown-item' id="Cinfv" value="Cinfv" onClick={e => changeSymmetry("Cinfv", 0.27, 0)}>C<sub>&infin;v</sub></div>
           </div>
         </div>
 
       </div>
       <SymmetryForm
         symmetry={symmetry}
-        R={R}
+        r={r}
         tau={tau}
-        rC2v={rC2v}
-        rCinfv={rCinfv}
-        setR={setR}
+        setr={setr}
         settau={settau}
-        setrC2v={setrC2v}
-        setrCinfv={setrCinfv}
       />
     </form>
   )
@@ -346,35 +343,15 @@ export function LightForm({
 
 const SymmetryForm = ({
   symmetry,
-  R,
+  r,
   tau,
-  rC2v,
-  rCinfv,
-  setR,
+  setr,
   settau,
-  setrC2v,
-  setrCinfv
 }) => {
 
-  if (symmetry === "C3v") {
+  if (symmetry === "C3v" || symmetry ==="C2v") {
     return (
-      <div id="C3v" className="mb-3">
-        <label htmlFor="R">R :</label>
-        <small id="RHelp" className="form-text text-muted">
-          (Hyperpolarizability ratios)
-        </small>
-        <input
-          type="text"
-          name="R"
-          className="form-control"
-          value={R}
-          onChange={e => setR(e.target.value)}
-        />
-      </div>
-    )
-  } else if (symmetry === "C2v") {
-    return (
-      <div id="C2v">
+      <div>
         <div className="mb-3">
           <label htmlFor="tau">τ(°) :</label>
           <small id="tauHelp" className="form-text text-muted">
@@ -390,32 +367,32 @@ const SymmetryForm = ({
         </div>
         <div className="mb-3">
           <label htmlFor="r">r :</label>
-          <small id="rC2vHelp" className="form-text text-muted">
+          <small id="rHelp" className="form-text text-muted">
             (Single bond polarizability derivative ratio)
           </small>
           <input
             type="text"
-            name="rC2v"
+            name="r"
             className="form-control"
-            value={rC2v}
-            onChange={e => setrC2v(e.target.value)}
+            value={r}
+            onChange={e => setr(e.target.value)}
           />
         </div>
-      </div>
+    </div>
     )
   } else if (symmetry === "Cinfv") {
     return (
-      <div id="Cinfv" className="mb-3">
+      <div className="mb-3">
         <label htmlFor="r">r :</label>
-        <small id="rCinfvHelp" className="form-text text-muted">
+        <small id="r" className="form-text text-muted">
           (Single bond polarizability derivative ratio)
         </small>
         <input
           type="text"
-          name="rCinfv"
+          name="r"
           className="form-control"
-          value={rCinfv}
-          onChange={e => setrCinfv(e.target.value)}
+          value={r}
+          onChange={e => setr(e.target.value)}
         />
       </div>
     )
