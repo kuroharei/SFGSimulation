@@ -2,6 +2,7 @@ import React from 'react'
 import LAB_1 from '../assets/images/LAB-1.jpg'
 import Head from '../Components/Head'
 import Research from './Research'
+import GroupMembers from './GroupMembers'
 
 
 
@@ -9,11 +10,14 @@ function Homepage({setPage}) {
   return (
     <React.StrictMode>
       <div className='col-fluid'>
-        <div className='row'>
+        <div className='row-fluid'>
           <Head/>
         </div>
-        <div className='row'>
+        <div className='row-fluid'>
           <Research/>
+        </div>
+        <div className='row-fluid'>
+          <GroupMembers/>
         </div>
       </div>
     </React.StrictMode>
