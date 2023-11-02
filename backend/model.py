@@ -345,13 +345,13 @@ class Cinfv(SFG):
         self.r = r
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 + self.r) / 2, (1 - self.r) / (1 + self.r)])
+        return np.array([(1 + self.r) / 2, (1 - self.r) / 2])
 
     def yyzssParam(self, squarecospsi, squaresinpsi):
         return self.xxzssParam(squarecospsi, squaresinpsi)
 
     def xzxssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 - self.r) / 2, 1])
+        return np.array([(1 - self.r) / 2, (1 - self.r) / 2])
 
     def zxxssParam(self, squarecospsi, squaresinpsi):
         return self.xzxssParam(squarecospsi, squaresinpsi)
@@ -363,7 +363,7 @@ class Cinfv(SFG):
         return self.xzxssParam(squarecospsi, squaresinpsi)
 
     def zzzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([self.r, -(1 - self.r) / self.r])
+        return np.array([self.r, self.r - 1])
 
     def xxzasParam(self, squarecospsi, squaresinpsi):
         return np.array([0, 0])
@@ -398,13 +398,13 @@ class C2v(SFG):
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
         return np.array([(self.Ra * squarecospsi + self.Rb * squaresinpsi + 1) / 2,
-                        -(self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / (self.Ra * squarecospsi + self.Rb * squaresinpsi + 1)])
+                        -(self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2])
 
     def yyzssParam(self, squarecospsi, squaresinpsi):
         return self.xxzssParam(squarecospsi, squaresinpsi)
 
     def xzxssParam(self, squarecospsi, squaresinpsi):
-        return np.array([- (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2, 1])
+        return np.array([- (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2, - (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / 2])
 
     def zxxssParam(self, squarecospsi, squaresinpsi):
         return self.xzxssParam(squarecospsi, squaresinpsi)
@@ -417,18 +417,16 @@ class C2v(SFG):
 
     def zzzssParam(self, squarecospsi, squaresinpsi):
         return np.array([(self.Ra * squaresinpsi + self.Rb * squarecospsi),
-                         (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1) / (self.Ra * squaresinpsi + self.Rb * squarecospsi)])
+                         (self.Ra * squaresinpsi + self.Rb * squarecospsi - 1)])
 
     def xxzasParam(self, squarecospsi, squaresinpsi):
-        return np.array([- squaresinpsi, 1])
+        return np.array([- squaresinpsi, - squaresinpsi])
 
     def yyzasParam(self, squarecospsi, squaresinpsi):
         return self.xxzasParam(squarecospsi, squaresinpsi)
 
     def xzxasParam(self, squarecospsi, squaresinpsi):
-        if squarecospsi - squaresinpsi == 0:
-            return [-1e-100, (1e100/2)]
-        return np.array([(squarecospsi - squaresinpsi) / 2, - 2 * squaresinpsi / (squarecospsi - squaresinpsi)])
+        return np.array([(squarecospsi - squaresinpsi) / 2, - squaresinpsi])
 
     def zxxasParam(self, squarecospsi, squaresinpsi):
         return self.xzxasParam(squarecospsi, squaresinpsi)
@@ -440,7 +438,7 @@ class C2v(SFG):
         return self.xzxasParam(squarecospsi, squaresinpsi)
 
     def zzzasParam(self, squarecospsi, squaresinpsi):
-        return np.array([2 * squaresinpsi, 1])
+        return np.array([2 * squaresinpsi, 2 * squaresinpsi])
 
 
 class C3v(SFG):
@@ -449,13 +447,13 @@ class C3v(SFG):
         self.R = R
 
     def xxzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 + self.R) / 2, (1 - self.R) / (1 + self.R)])
+        return np.array([(1 + self.R) / 2, (1 - self.R) / 2])
 
     def yyzssParam(self, squarecospsi, squaresinpsi):
         return self.xxzssParam(squarecospsi, squaresinpsi)
 
     def xzxssParam(self, squarecospsi, squaresinpsi):
-        return np.array([(1 - self.R) / 2, 1])
+        return np.array([(1 - self.R) / 2, (1 - self.R) / 2])
 
     def zxxssParam(self, squarecospsi, squaresinpsi):
         return self.xzxssParam(squarecospsi, squaresinpsi)
@@ -467,7 +465,7 @@ class C3v(SFG):
         return self.xzxssParam(squarecospsi, squaresinpsi)
 
     def zzzssParam(self, squarecospsi, squaresinpsi):
-        return np.array([self.R, - (1 - self.R) / self.R])
+        return np.array([self.R, - (1 - self.R)])
 
     def xxzasParam(self, squarecospsi, squaresinpsi):
         return np.array([-1.0, 1.0])
