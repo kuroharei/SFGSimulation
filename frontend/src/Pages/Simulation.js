@@ -134,9 +134,12 @@ function Simulation() {
                 <div className='row mb-3 justify-content-center'>
                     <ResultTable param={param}/>
                 </div>
-                <div className='row justify-content-center'>
+                <div className='row mb-3 justify-content-center'>
                     <ResultGraph graph={graph}/>
                 </div>
+                {/* <div className='text-center'>
+                    <button className='btn btn-outline-light btn-lg' type='submit'>Download</button>
+                </div> */}
             </div>
         </div>
     )
