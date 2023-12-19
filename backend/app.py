@@ -89,6 +89,8 @@ def calculation():
                          "sps" : {"d" : float(sample.spsasd), "c" : float(sample.spsasc)},
                          "pss" : {"d" : float(sample.pssasd), "c" : float(sample.pssasc)},
                          "ppp" : {"d" : float(sample.pppasd), "c" : float(sample.pppasc)}}}
+        print(param)
+        print(sample.spsasc, sample.spsasd)
         return jsonify({"graph": graph,
                         "param": param})
 
@@ -189,5 +191,5 @@ def calculation():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-    # app.run(debug=True)
+    # app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True)

@@ -1,6 +1,7 @@
 import React from 'react'
 import { ConfigurationCanvas } from './Canvas'
 
+
 const SelectSymmetry = ({symmetry}) => {
   if (symmetry === "C3v"){
     return (
@@ -41,7 +42,8 @@ export function MolecularForm({
   return (
     <form>
       <div className="mb-3">
-        <label htmlFor="FWHM">Δθ(°) :</label>
+        <a className="btn" data-bs-toggle="popover" data-bs-title="Popover title" da   ta-bs-content="Distribution width of orientational angle θ">Δθ(°) :</a>
+        {/* <label htmlFor="FWHM" className="btn" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="Distribution width of orientational angle θ">Δθ(°) :</label> */}
         <small id="FWHMHelp" className="form-text text-muted">
           (Distribution width of orientational angle θ)
         </small>
